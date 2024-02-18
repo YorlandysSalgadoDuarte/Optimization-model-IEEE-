@@ -103,20 +103,14 @@ for i in pico_maximo_por_dias[54:56]:
 print(pico_diario,len(pico_diario))
 
 
+semana_9_17_pico=pico_maximo_por_dias[56:120]
 
 
 
 
 
 
-
-
-
-
-
-
-
-# semana_9_17_pico=pico_maximo_por_dias[56:120]
+# 
 # semana9_17_datos_dados=pico_diario_por_horas_en_porciento[24:49]
 # for i in  semana_9_17_pico:
 #     for j in semana9_17_datos_dados:
