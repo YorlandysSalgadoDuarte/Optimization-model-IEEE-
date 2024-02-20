@@ -462,3 +462,9 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
     # Mostrar el gráfico
     plt.show()
     return pico_diario
+
+#! FUNCION DE DISTRIBUCION  EXPONENCIAL__________________________________________________________
+def Funcion_exp(Parm_exp):
+    t=symbols('t')
+    f_exp =Parm_exp *(exp(-Parm_exp*t))
+    return f_exp #Funcion distribucion exponencial

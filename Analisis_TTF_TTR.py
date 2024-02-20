@@ -34,8 +34,12 @@ for i in  lista_columna_MTTF:
     parametro_dist_exp=1/i #Parámetro Distribución Exponencial
     lista_paramet_dis_exp_de_MTTF.append(parametro_dist_exp)
 # TODO Extraer la columna y convertirla en una lista sobre los datos de MTTR
-# lista_columna_MTTR = df['MTTR(horas)'].tolist()
-# lista_paramet_dis_exp_de_MTTR=[]
-# for i in  lista_columna_MTTR:
-#     parametro_dist_exp=1/i #Parámetro Distribución Exponencial
-#     lista_paramet_dis_exp_de_MTTR.append(parametro_dist_exp)
+lista_columna_MTTR = df['MTTR(horas)'].tolist()
+lista_paramet_dis_exp_de_MTTR=[]
+for i in  lista_columna_MTTR:
+    parametro_dist_exp=1/i #Parámetro Distribución Exponencial
+    lista_paramet_dis_exp_de_MTTR.append(parametro_dist_exp)
+
+print (len(lista_paramet_dis_exp_de_MTTF),len(lista_paramet_dis_exp_de_MTTR))
+
+solv=
