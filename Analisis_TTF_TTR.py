@@ -19,7 +19,7 @@ df = pd.read_excel(nombre_archivo, engine='openpyxl')
 # Puedes imprimir el DataFrame para verificar
 print(df)
 
-#!Calcular el valor de los datos -------------------------=========================-----------------
+#!Calcular el valor de los datos ---------------------------------------------------------------------------
 
 #todo CALCULANDO PRIMERAMENTE LOS VALORES DE MTTF, la generacion de los datos tiene que ser menor que 8784
 # TODOb datos que son los valores que se obtuvieron en la curva de caraga
@@ -42,4 +42,3 @@ for i in  lista_columna_MTTR:
 
 print (len(lista_paramet_dis_exp_de_MTTF),len(lista_paramet_dis_exp_de_MTTR))
 
-solv=

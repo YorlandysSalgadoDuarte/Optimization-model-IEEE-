@@ -1,4 +1,4 @@
-from Demanda_de_IEEE import *
+from Modelo_Optimizacion import *
 #  #!Encontrar el pico de la demanda---------------------------------------------
  #? En la tabla 5 del documento queda claro cual es el pico maximo de la demanda analizada 
 pico_maximo=2850 # esta dado en MW
@@ -17,3 +17,9 @@ pico_diario_por_horas_en_porciento_semana_9_17_y_31_43=[63,62,60,58,59,65,72,85,
 
 
 calculo_demanda(pico_maximo,pico_maximo_por_semana_en_porciento,pico_maximo_por_dias_en_porciento,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52,pico_diario_por_horas_en_porciento_semana_18_30,pico_diario_por_horas_en_porciento_semana_9_17_y_31_43)
+
+#! FUNCION DE DISTRIBUCION  EXPONENCIAL__________________________________________________________
+def Funcion_exp(Parm_exp):
+    t=symbols('t')
+    f_exp =Parm_exp *(exp(-Parm_exp*t))
+    return f_exp #Funcion distribucion exponencial
