@@ -1,5 +1,10 @@
 import pandas as pd
 import os
+from Script_Funciones import *
+import sympy as sp
+import random
+from sympy import symbols, Eq, solve,Abs
+
 
 #! Establecer la recoleccion de datos de la tabla_4_---------------------------------------------------
 
@@ -40,5 +45,6 @@ for i in  lista_columna_MTTR:
     parametro_dist_exp=1/i #Parámetro Distribución Exponencial
     lista_paramet_dis_exp_de_MTTR.append(parametro_dist_exp)
 
-print (len(lista_paramet_dis_exp_de_MTTF),len(lista_paramet_dis_exp_de_MTTR))
 
+t=symbols('t')
+lista_horas_TTF=[]

@@ -1,4 +1,3 @@
-
 def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pico_maximo_por_dias_en_porciento:int,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52:list,pico_diario_por_horas_en_porciento_semana_18_30:list,pico_diario_por_horas_en_porciento_semana_9_17_y_31_43:list):
     #calculo a paritr de los picos maximos
     #? Variables para el calculo
@@ -21,7 +20,7 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
     #TODo Primer grupo de valores para el calculo de la demanda--------------------------------------
     semana_1_8_picos=pico_maximo_por_dias[:63]
 
-    for i in pico_maximo_por_dias[:5]:
+    for i in pico_maximo_por_dias[0:5]:
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
@@ -85,18 +84,13 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[56:61]:
-        for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[:24]:
-            solv1=i*(j/100)
-            pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[61:63]:
-        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
-            solv1=i*(j/100)
-            pico_diario.append(solv1)
+
             
-    semana_9_17_pico=pico_maximo_por_dias[63:126]#----------------------------------------------------------------------
-
-
+    semana_9_17_pico=pico_maximo_por_dias[63:119]#----------------------------------------------------------------------
+    for i in pico_maximo_por_dias[56:61]:
+        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[:24]:
+            solv1=i*(j/100)
+            pico_diario.append(solv1)
     for i in pico_maximo_por_dias[61:63]:
         for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
             solv1=i*(j/100)
@@ -165,18 +159,17 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
         for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
+
+    semana_18_30_pico=pico_maximo_por_dias[119:210]#----------------------------------------------------------------------
+
     for i in pico_maximo_por_dias[119:124]:
-        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[:24]:
+        for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
     for i in pico_maximo_por_dias[124:126]:
-        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
+        for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-
-    semana_18_30_pico=pico_maximo_por_dias[126:217]#----------------------------------------------------------------------
-
-
     for i in pico_maximo_por_dias[126:131]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
@@ -205,86 +198,84 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[152:157]:
+    for i in pico_maximo_por_dias[152:154]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[157:162]:
+    for i in pico_maximo_por_dias[154:159]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[162:164]:
+    for i in pico_maximo_por_dias[159:161]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[164:169]:
+    for i in pico_maximo_por_dias[161:166]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[169:171]:
+    for i in pico_maximo_por_dias[166:168]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[171:176]:
+    for i in pico_maximo_por_dias[168:170]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[176:178]:
+    for i in pico_maximo_por_dias[170:175]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[178:183]:
+    for i in pico_maximo_por_dias[175:177]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[183:185]:
+    for i in pico_maximo_por_dias[177:179]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[185:187]:
+    for i in pico_maximo_por_dias[179:184]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[187:189]:
+    for i in pico_maximo_por_dias[184:186]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[189:194]:
+    for i in pico_maximo_por_dias[186:191]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[194:196]:
+    for i in pico_maximo_por_dias[191:193]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[196:201]:
+    for i in pico_maximo_por_dias[193:198]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[201:203]:
+    for i in pico_maximo_por_dias[198:200]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[203:208]:
+    for i in pico_maximo_por_dias[200:205]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[208:210]:
+    for i in pico_maximo_por_dias[205:210]:
         for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
             solv1=i*(j/100)
-            pico_diario.append(solv1)
+            pico_diario.append(solv1)            
+    semana_31_43_pico=pico_maximo_por_dias[210:301]#--------------------------------------------------
+            
     for i in pico_maximo_por_dias[210:215]:
-        for j in pico_diario_por_horas_en_porciento_semana_18_30[:24]:
+        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
     for i in pico_maximo_por_dias[215:217]:
-        for j in pico_diario_por_horas_en_porciento_semana_18_30[24:]:
+        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-
-    semana_31_43_pico=pico_maximo_por_dias[217:308]#--------------------------------------------------
-            
-
     for i in pico_maximo_por_dias[217:222]:
         for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[:24]:
             solv1=i*(j/100)
@@ -381,16 +372,17 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
         for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
+            
+    semana_44_52_pico=pico_maximo_por_dias[301:357]#----------------------------------------------------------------------
+        
     for i in pico_maximo_por_dias[301:306]:
-        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[:24]:
+        for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
     for i in pico_maximo_por_dias[306:308]:
-        for j in pico_diario_por_horas_en_porciento_semana_9_17_y_31_43[24:]:
+        for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[24:]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-
-    semana_44_52_pico=pico_maximo_por_dias[308:364]
     for i in pico_maximo_por_dias[308:313]:
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[:24]:
             solv1=i*(j/100)
@@ -446,15 +438,14 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
     for i in pico_maximo_por_dias[355:357]:
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[24:]:
             solv1=i*(j/100)
-            pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[357:362]:
+    print(pico_diario,len(pico_diario))
+    for i in pico_maximo_por_dias[357:359]:
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[:24]:
             solv1=i*(j/100)
             pico_diario.append(solv1)
-    for i in pico_maximo_por_dias[362:364]:
+    for i in pico_maximo_por_dias[359:364]:
         for j in pico_diario_por_horas_en_porciento_semana_1_8_y_44_52[24:]:
             solv1=i*(j/100)
-            pico_diario.append(solv1)
     print(pico_diario,len(pico_diario))
     import matplotlib.pyplot as plt
     # Graficar la lista
@@ -464,7 +455,8 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
     return pico_diario
 
 #! FUNCION DE DISTRIBUCION  EXPONENCIAL__________________________________________________________
-def Funcion_exp(Parm_exp):
+from sympy import symbols ,integrate,exp,pi,erf,sqrt,Eq,solve,symbols, summation, oo
+def Funcion_exp(Parm_exp:float):
     t=symbols('t')
     f_exp =Parm_exp *(exp(-Parm_exp*t))
     return f_exp #Funcion distribucion exponencial
