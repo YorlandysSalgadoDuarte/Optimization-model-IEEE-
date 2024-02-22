@@ -192,103 +192,117 @@ for j in datos_uniformes:
     if sum(tiempos_de_reparacion_U400)<=8736:
             continue
     else:break
+    
 
-#TODO degradation_de las Unidades_sin_mantenimiento
-#* UNIDAD 12========================================================
-for i,j in zip(sorted(tiempos_de_falla_U12),sorted(tiempos_de_reparacion_U12)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U12_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U12_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U12_sin_mantenimiento=',degradation_U12_sin_mantenimiento)
 
-#* UNIDAD 20========================================================
-for i,j in zip(sorted(tiempos_de_falla_U20),sorted(tiempos_de_reparacion_U20)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U20_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U20_sin_mantenimiento)
-                if comp>=8760:
+# #TODO degradation_de las Unidades_sin_mantenimiento
+# #* UNIDAD 12========================================================
+import matplotlib.pyplot as plt
+def funcion_escalon(ttf, ttr,valor_escala:int):
+    tiempo_total = 8761
+    resultado = []
+    acumulado = 0
+    escalon_actual = valor_escala
+    for i,j in zip(sorted(ttf),sorted(ttr)):
+            acumulado+=i
+            resultado.extend([escalon_actual] * int(i))
+            acumulado+=j
+            resultado.extend([0] * int(acumulado))
+            if acumulado>=8761:
                         break
-        else:continue
-print('degradation_U20_sin_mantenimiento=',degradation_U20_sin_mantenimiento)
+            else:continue
+    plt.plot(range(len(resultado)), resultado)
+    plt.xlabel('Tiempo')
+    plt.ylabel('Valor del escalón')
+    plt.title('Función Escalón')
+    plt.show()
+    return resultado
 
-#* UNIDAD 50========================================================
-for i,j in zip(sorted(tiempos_de_falla_U50),sorted(tiempos_de_reparacion_U50)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U50_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U50_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U50_sin_mantenimiento=',degradation_U50_sin_mantenimiento)
 
-#* UNIDAD 76========================================================
-for i,j in zip(sorted(tiempos_de_falla_U76),sorted(tiempos_de_reparacion_U76)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U76_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U76_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U76_sin_mantenimiento=',degradation_U76_sin_mantenimiento)
+# #* UNIDAD 20========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U20),sorted(tiempos_de_reparacion_U20)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U20_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U20_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U20_sin_mantenimiento=',degradation_U20_sin_mantenimiento)
 
-#* UNIDAD 100========================================================
-for i,j in zip(sorted(tiempos_de_falla_U100),sorted(tiempos_de_reparacion_U100)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U100_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U100_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U100_sin_mantenimiento=',degradation_U100_sin_mantenimiento)
+# #* UNIDAD 50========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U50),sorted(tiempos_de_reparacion_U50)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U50_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U50_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U50_sin_mantenimiento=',degradation_U50_sin_mantenimiento)
 
-#* UNIDAD 155========================================================
-for i,j in zip(sorted(tiempos_de_falla_U155),sorted(tiempos_de_reparacion_U155)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U155_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U155_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U155_sin_mantenimiento=',degradation_U155_sin_mantenimiento)
+# #* UNIDAD 76========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U76),sorted(tiempos_de_reparacion_U76)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U76_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U76_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U76_sin_mantenimiento=',degradation_U76_sin_mantenimiento)
 
-#* UNIDAD 197========================================================
-for i,j in zip(sorted(tiempos_de_falla_U197),sorted(tiempos_de_reparacion_U197)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U197_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U197_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U197_sin_mantenimiento=',degradation_U197_sin_mantenimiento)
+# #* UNIDAD 100========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U100),sorted(tiempos_de_reparacion_U100)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U100_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U100_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U100_sin_mantenimiento=',degradation_U100_sin_mantenimiento)
 
-#* UNIDAD 350========================================================
-for i,j in zip(sorted(tiempos_de_falla_U350),sorted(tiempos_de_reparacion_U350)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U350_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U350_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U350_sin_mantenimiento=',degradation_U350_sin_mantenimiento)
+# #* UNIDAD 155========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U155),sorted(tiempos_de_reparacion_U155)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U155_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U155_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U155_sin_mantenimiento=',degradation_U155_sin_mantenimiento)
 
-#* UNIDAD 400========================================================
-for i,j in zip(sorted(tiempos_de_falla_U400),sorted(tiempos_de_reparacion_U400)):
-        solv=i+j
-        if solv<=8760:
-                degradation_U400_sin_mantenimiento.append(solv)
-                comp=sum(degradation_U400_sin_mantenimiento)
-                if comp>=8760:
-                        break
-        else:continue
-print('degradation_U400_sin_mantenimiento=',degradation_U400_sin_mantenimiento)
+# #* UNIDAD 197========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U197),sorted(tiempos_de_reparacion_U197)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U197_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U197_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U197_sin_mantenimiento=',degradation_U197_sin_mantenimiento)
+
+# #* UNIDAD 350========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U350),sorted(tiempos_de_reparacion_U350)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U350_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U350_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U350_sin_mantenimiento=',degradation_U350_sin_mantenimiento)
+
+# #* UNIDAD 400========================================================
+# for i,j in zip(sorted(tiempos_de_falla_U400),sorted(tiempos_de_reparacion_U400)):
+#         solv=i+j
+#         if solv<=8760:
+#                 degradation_U400_sin_mantenimiento.append(solv)
+#                 comp=sum(degradation_U400_sin_mantenimiento)
+#                 if comp>=8760:
+#                         break
+#         else:continue
+# print('degradation_U400_sin_mantenimiento=',degradation_U400_sin_mantenimiento)
