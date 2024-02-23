@@ -27,24 +27,61 @@ Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
 
 Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 
-#TODO degradation_de las Unidades_sin_mantenimiento
-lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,tiempos_de_falla_U12,tiempos_de_falla_U20,tiempos_de_falla_U50,tiempos_de_falla_U76,tiempos_de_falla_U100,tiempos_de_falla_U155,tiempos_de_falla_U197,tiempos_de_falla_U350,tiempos_de_falla_U400,tiempos_de_reparacion_U12,tiempos_de_reparacion_U20,tiempos_de_reparacion_U50,tiempos_de_reparacion_U76,tiempos_de_reparacion_U100,tiempos_de_reparacion_U155,tiempos_de_reparacion_U197,tiempos_de_reparacion_U350,tiempos_de_reparacion_U400=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 
-# #* UNIDAD 12=====================================
-escalon_12=funcion_escalon(tiempos_de_falla_U12,tiempos_de_reparacion_U12,12)
-# #* UNIDAD 20========================================================
-escalon_20=funcion_escalon(tiempos_de_falla_U20,tiempos_de_reparacion_U20,20)
-# #* UNIDAD 50========================================================
-escalon_50=funcion_escalon(tiempos_de_falla_U50,tiempos_de_reparacion_U50,50)
-# #* UNIDAD 76========================================================
-escalon_76=funcion_escalon(tiempos_de_falla_U76,tiempos_de_reparacion_U76,76)
-# #* UNIDAD 100========================================================
-escalon_100=funcion_escalon(tiempos_de_falla_U100,tiempos_de_reparacion_U100,100)
-# #* UNIDAD 155========================================================
-escalon_155=funcion_escalon(tiempos_de_falla_U155,tiempos_de_reparacion_U155,155)
-# #* UNIDAD 197========================================================
-escalon_197=funcion_escalon(tiempos_de_falla_U197,tiempos_de_reparacion_U197,197)
-# #* UNIDAD 350========================================================
-escalon_350=funcion_escalon(tiempos_de_falla_U350,tiempos_de_reparacion_U350,350)
-# #* UNIDAD 400========================================================
-escalon_400=funcion_escalon(tiempos_de_falla_U400,tiempos_de_reparacion_U400,400)
+#TODO degradation_de las Unidades_sin_mantenimiento
+lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
+
+print('\n#***************************Valores de ttf aleatorios **************************\n')
+print('Calculo de ttf_U12',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,0,100))#U12
+print('Calculo de ttf_U20',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,1,100))#U20
+print('Calculo de ttf_U50',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,2,100))#U50
+print('Calculo de ttf_U76',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,3,100))#U76
+print('Calculo de ttf_U100',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,4,100))#U100
+print('Calculo de ttf_U155',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,5,100))#U155
+print('Calculo de ttf_U197',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,6,100))#U197
+print('Calculo de ttf_U350',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,7,100))#U350
+print('Calculo de ttf_U400',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,8,100))#U400
+print('\n#***************************Valores de ttr aleatorios**************************\n')
+print('Calculo de ttr_U12',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,0,100))#)U12 
+print('Calculo de ttr_U20',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,1,100))#U20
+print('Calculo de ttr_U50',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,2,100))#U50
+print('Calculo de ttr_U76',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,3,100))#U76
+print('Calculo de ttr_U100',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,4,100))#)U100
+print('Calculo de ttr_U155',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,5,100))#)U155
+print('Calculo de ttr_U197',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,6,100))#)U197
+print('Calculo de ttr_U350',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,7,100))#)U350
+print('Calculo de ttr_U400',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8,100))#U400
+
+# *************************Ventana de valores hasta las 8736 horas****************************************
+valores_acotados_ventana_U12 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 0, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 0, 100), 12)[:8736]
+valores_acotados_ventana_U20 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 1, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 1, 100), 20)[:8736]
+valores_acotados_ventana_U50 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 2, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 2, 100), 50)[:8736]
+valores_acotados_ventana_U76 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 3, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 3, 100), 76)[:8736]
+valores_acotados_ventana_U100 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,4, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 4, 100), 100)[:8736]
+valores_acotados_ventana_U155 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 5, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 5, 100), 155)[:8736]
+valores_acotados_ventana_U197= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 6, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 6, 100), 197)[:8736]
+valores_acotados_ventana_U350= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 7, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 7, 100), 350)[:8736]
+valores_para_acotar_la_ventana_U400 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 8, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8, 400), 12)[:8736]
+# *************************Función para crear un subplot dado un índice****************************************
+def crear_subplot(indice, datos, etiqueta):
+    plt.subplot(3, 3, indice)
+    plt.plot(range(len(datos)), datos)
+    plt.title(f'UNIDAD {etiqueta}',fontsize=5)
+    plt.xlabel('Tiempo',fontsize=5)
+    plt.ylabel('Valor del escalón',fontsize=10)
+# Obtener datos para cada unidad
+# Crear subgráficos para cada unidad
+plt.figure(figsize=(15, 15))
+crear_subplot(1, valores_acotados_ventana_U12 ,'12')
+crear_subplot(2,valores_acotados_ventana_U20 ,'20')
+crear_subplot(3,valores_acotados_ventana_U50 ,'50')
+crear_subplot(4,valores_acotados_ventana_U76 ,'76')
+crear_subplot(5,valores_acotados_ventana_U100,'100')
+crear_subplot(6,valores_acotados_ventana_U155,'155')
+crear_subplot(7,valores_acotados_ventana_U197,'197')
+crear_subplot(8,valores_acotados_ventana_U350,'350')
+crear_subplot(9,valores_para_acotar_la_ventana_U400,'400')
+# Ajustar el diseño para evitar superposiciones
+plt.tight_layout()
+# Mostrar todas las gráficas en una sola ventana
+plt.show()

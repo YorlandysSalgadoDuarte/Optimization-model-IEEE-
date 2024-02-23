@@ -502,201 +502,23 @@ def Parametros_para_MTTF_MTTR(Nombre_excel:str,MTTF:str, MTTR:str):
         lista_paramet_dis_exp_de_MTTR.append(parametro_dist_exp)
     print('lista_paramet_dis_exp_de_MTTR',lista_paramet_dis_exp_de_MTTR)
     print('lista_paramet_dis_exp_de_MTTF',lista_paramet_dis_exp_de_MTTF)
+    return lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR
 # * Calculo de los valores aleatorios y los tiempos para TTF y TTR -----------------------------------------------------
-#! Resultado de los tiempos de falla =======================
-    tiempos_de_falla_U12=[]
-    tiempos_de_falla_U20=[]
-    tiempos_de_falla_U50=[]
-    tiempos_de_falla_U76=[]
-    tiempos_de_falla_U100=[]
-    tiempos_de_falla_U155=[]
-    tiempos_de_falla_U197=[]
-    tiempos_de_falla_U350=[]
-    tiempos_de_falla_U400=[]
-#! Resultado de los tiempos de reparacion =======================
-    tiempos_de_reparacion_U12=[]
-    tiempos_de_reparacion_U20=[]
-    tiempos_de_reparacion_U50=[]
-    tiempos_de_reparacion_U76=[]
-    tiempos_de_reparacion_U100=[]
-    tiempos_de_reparacion_U155=[]
-    tiempos_de_reparacion_U197=[]
-    tiempos_de_reparacion_U350=[]
-    tiempos_de_reparacion_U400=[]
-
 #! CAlculo de cada Unidad:
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+def calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF_o_MTTR,n,valores_randon):
+    tiempos_de_falla_o_repracion=[]
+    datos_uniformes = np.random.rand(valores_randon) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
     for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[0]))*1000
-        tiempos_de_falla_U12.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U12)<=8736:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF_o_MTTR[n]))*1000
+        tiempos_de_falla_o_repracion.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_o_repracion)<=8736:
                 continue
         else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[1]))*1000
-        tiempos_de_falla_U20.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U20)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[2]))*1000
-        tiempos_de_falla_U50.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U50)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[3]))*1000
-        tiempos_de_falla_U76.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U76)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[4]))*1000
-        tiempos_de_falla_U100.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U100)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[5]))*1000
-        tiempos_de_falla_U155.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U155)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[6]))*1000
-        tiempos_de_falla_U197.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U197)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[7]))*1000
-        tiempos_de_falla_U350.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U350)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[0]))*1000
-        tiempos_de_falla_U400.append(resultado_en_hora_ttf)
-        if sum(tiempos_de_falla_U400)<=8736:
-                continue
-        else:break
-        
-    #! CAlculo de cada Unidad:
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[0]))*1000
-        tiempos_de_reparacion_U12.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U12)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[1]))*1000
-        tiempos_de_reparacion_U20.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U20)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[2]))*1000
-        tiempos_de_reparacion_U50.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U50)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[3]))*1000
-        tiempos_de_reparacion_U76.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U76)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[4]))*1000
-        tiempos_de_reparacion_U100.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U100)<=8736:
-                continue
-        else:break
-
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[5]))*1000
-        tiempos_de_reparacion_U155.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U155)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[6]))*1000
-        tiempos_de_reparacion_U197.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U197)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[7]))*1000
-        tiempos_de_reparacion_U350.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U350)<=8736:
-                continue
-        else:break
-        
-    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
-    for j in datos_uniformes:
-        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[8]))*1000
-        tiempos_de_reparacion_U400.append(resultado_en_hora_ttr)
-        if sum(tiempos_de_reparacion_U400)<=8736:
-                continue
-        else:break
-    print("\n==================A CONTINUACION LOS TIEMPOS DE FALLA=======================================================\n")
-    print('tiempos_de_falla_U12=',tiempos_de_falla_U12)    
-    print('tiempos_de_falla_U20=',tiempos_de_falla_U20)    
-    print('tiempos_de_falla_U50=',tiempos_de_falla_U50)    
-    print('tiempos_de_falla_U76=',tiempos_de_falla_U76)    
-    print('tiempos_de_falla_U100=',tiempos_de_falla_U100)
-    print('tiempos_de_falla_U155=',tiempos_de_falla_U155)
-    print('tiempos_de_falla_U197=',tiempos_de_falla_U197)
-    print('tiempos_de_falla_U350=',tiempos_de_falla_U350)
-    print('tiempos_de_falla_U400=',tiempos_de_falla_U400)
-    print("\n==================A CONTINUACION LOS TIEMPOS DE REPARCION=======================================================\n")
-    print('tiempos_de_reparacion_U12=',tiempos_de_reparacion_U12)    
-    print('tiempos_de_reparacion_U20=',tiempos_de_reparacion_U20)    
-    print('tiempos_de_reparacion_U50=',tiempos_de_reparacion_U50)    
-    print('tiempos_de_reparacion_U76=',tiempos_de_reparacion_U76)    
-    print('tiempos_de_reparacion_U100=',tiempos_de_reparacion_U100)
-    print('tiempos_de_reparacion_U155=',tiempos_de_reparacion_U155)
-    print('tiempos_de_reparacion_U197=',tiempos_de_reparacion_U197)
-    print('tiempos_de_reparacion_U350=',tiempos_de_reparacion_U350)
-    print('tiempos_de_reparacion_U400=',tiempos_de_reparacion_U400)
-    
-    return lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,tiempos_de_falla_U12,tiempos_de_falla_U20,tiempos_de_falla_U50,tiempos_de_falla_U76,tiempos_de_falla_U100,tiempos_de_falla_U155,tiempos_de_falla_U197,tiempos_de_falla_U350,tiempos_de_falla_U400,tiempos_de_reparacion_U12,tiempos_de_reparacion_U20,tiempos_de_reparacion_U50,tiempos_de_reparacion_U76,tiempos_de_reparacion_U100,tiempos_de_reparacion_U155,tiempos_de_reparacion_U197,tiempos_de_reparacion_U350,tiempos_de_reparacion_U400
+    return tiempos_de_falla_o_repracion
 
 # #TODO degradation_de las Unidades_sin_mantenimiento
 def funcion_escalon(ttf, ttr,valor_max_MW:int):
-    tiempo_total = 8761
+    #tiempo_total = 8736
     resultado = []
     acumulado = 0
     escalon_actual = valor_max_MW
@@ -705,12 +527,35 @@ def funcion_escalon(ttf, ttr,valor_max_MW:int):
             resultado.extend([escalon_actual] * int(i))
             acumulado+=j
             resultado.extend([0] * int(acumulado))
-            if acumulado>=8761:
+            if acumulado>=8736:
                         break
             else:continue
-    plt.plot(range(len(resultado)), resultado)
-    plt.xlabel('Tiempo')
-    plt.ylabel('Valor del escalón')
-    plt.title('Función Escalón')
-    plt.show()
+    return resultado
+
+#!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
+###########################################Semanas de Mant*dias_de_la_Semana*horas del dia
+tiempo_establ_por_IEEE_mantenimiento_U_12 =2*7*24
+tiempo_sin_mantenimiento_U_12=[]
+tiempo_establ_por_IEEE_mantenimiento_U_20 =2*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_50 =2*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_76 =3*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_100=3*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_155=4*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_197=4*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_350=5*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_400=6*7*24
+
+def funcion_escalon(tiempo_establ_por_IEEE_mantenimiento_U_12, ttr,valor_max_MW:int):
+    #tiempo_total = 8736
+    resultado = []
+    acumulado = 0
+    escalon_actual = valor_max_MW
+    for i,j in zip(tiempo_establ_por_IEEE_mantenimiento_U_12,sorted(ttr)):
+            acumulado+=i
+            resultado.extend([escalon_actual] * int(i))
+            acumulado+=j
+            resultado.extend([0] * int(acumulado))
+            if acumulado>=8736:
+                        break
+            else:continue
     return resultado
