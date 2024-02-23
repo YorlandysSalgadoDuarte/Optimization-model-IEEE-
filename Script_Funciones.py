@@ -1,3 +1,12 @@
+import matplotlib.pyplot as plt
+from scipy.stats import expon
+import pandas as pd
+import os
+from Script_Funciones import *
+import sympy as sp
+import numpy as np
+import random
+
 def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pico_maximo_por_dias_en_porciento:int,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52:list,pico_diario_por_horas_en_porciento_semana_18_30:list,pico_diario_por_horas_en_porciento_semana_9_17_y_31_43:list):
     #calculo a paritr de los picos maximos
     #? Variables para el calculo
@@ -447,138 +456,18 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
             solv1=i*(j/100)
             pico_diario.append(solv1)
     print(pico_diario,len(pico_diario))
-    import matplotlib.pyplot as plt
+   
     # Graficar la lista
     plt.plot(pico_diario)
     # Mostrar el gráfico
     plt.show()
     return pico_diario
-
-
-
-#! Comprobacion de los datos suministrados a la tabla
-#suma=[]
-# suma.append(len(pico_maximo_por_dias[0:5]))
-# suma.append(len(pico_maximo_por_dias[5:7]))
-# suma.append(len(pico_maximo_por_dias[7:12]))
-# suma.append(len(pico_maximo_por_dias[12:14]))
-# suma.append(len(pico_maximo_por_dias[14:19]))
-# suma.append(len(pico_maximo_por_dias[19:21]))
-# suma.append(len(pico_maximo_por_dias[21:26]))
-# suma.append(len(pico_maximo_por_dias[26:28]))
-# suma.append(len(pico_maximo_por_dias[28:33]))
-# suma.append(len(pico_maximo_por_dias[33:35]))
-# suma.append(len(pico_maximo_por_dias[35:40]))
-# suma.append(len(pico_maximo_por_dias[40:42]))
-# suma.append(len(pico_maximo_por_dias[42:47]))
-# suma.append(len(pico_maximo_por_dias[47:49]))
-# suma.append(len(pico_maximo_por_dias[49:54]))
-# suma.append(len(pico_maximo_por_dias[54:56]))
-# suma.append(len(pico_maximo_por_dias[56:61]))
-# suma.append(len(pico_maximo_por_dias[61:63]))
-# suma.append(len(pico_maximo_por_dias[63:68]))
-# suma.append(len(pico_maximo_por_dias[68:70]))
-# suma.append(len(pico_maximo_por_dias[70:75]))
-# suma.append(len(pico_maximo_por_dias[75:77]))
-# suma.append(len(pico_maximo_por_dias[77:82]))
-# suma.append(len(pico_maximo_por_dias[82:84]))
-# suma.append(len(pico_maximo_por_dias[84:89]))
-# suma.append(len(pico_maximo_por_dias[89:91]))
-# suma.append(len(pico_maximo_por_dias[91:96]))
-# suma.append(len(pico_maximo_por_dias[96:98]))
-# suma.append(len(pico_maximo_por_dias[98:103]))
-# suma.append(len(pico_maximo_por_dias[103:105]))
-# suma.append(len(pico_maximo_por_dias[105:110]))
-# suma.append(len(pico_maximo_por_dias[110:112]))
-# suma.append(len(pico_maximo_por_dias[112:117]))
-# suma.append(len(pico_maximo_por_dias[117:119]))
-# suma.append(len(pico_maximo_por_dias[119:124]))
-# suma.append(len(pico_maximo_por_dias[124:126]))
-# suma.append(len(pico_maximo_por_dias[126:131]))
-# suma.append(len(pico_maximo_por_dias[131:133]))
-# suma.append(len(pico_maximo_por_dias[133:138]))
-# suma.append(len(pico_maximo_por_dias[138:140]))
-# suma.append(len(pico_maximo_por_dias[140:145]))
-# suma.append(len(pico_maximo_por_dias[145:147]))
-# suma.append(len(pico_maximo_por_dias[147:152]))
-# suma.append(len(pico_maximo_por_dias[152:154]))
-# suma.append(len(pico_maximo_por_dias[154:159]))
-# suma.append(len(pico_maximo_por_dias[159:161]))
-# suma.append(len(pico_maximo_por_dias[161:166]))
-# suma.append(len(pico_maximo_por_dias[166:168]))
-# suma.append(len(pico_maximo_por_dias[168:173]))
-# suma.append(len(pico_maximo_por_dias[173:175]))
-# suma.append(len(pico_maximo_por_dias[175:180]))
-# suma.append(len(pico_maximo_por_dias[180:182]))
-# suma.append(len(pico_maximo_por_dias[182:187]))
-# suma.append(len(pico_maximo_por_dias[187:189]))
-# suma.append(len(pico_maximo_por_dias[189:194]))
-# suma.append(len(pico_maximo_por_dias[194:196]))
-# suma.append(len(pico_maximo_por_dias[196:201]))
-# suma.append(len(pico_maximo_por_dias[201:203]))
-# suma.append(len(pico_maximo_por_dias[203:208]))
-# suma.append(len(pico_maximo_por_dias[208:210]))
-# suma.append(len(pico_maximo_por_dias[210:215]))
-# suma.append(len(pico_maximo_por_dias[215:217]))
-# suma.append(len(pico_maximo_por_dias[217:222]))
-# suma.append(len(pico_maximo_por_dias[222:224]))
-# suma.append(len(pico_maximo_por_dias[224:229]))
-# suma.append(len(pico_maximo_por_dias[229:231]))
-# suma.append(len(pico_maximo_por_dias[231:236]))
-# suma.append(len(pico_maximo_por_dias[236:238]))
-# suma.append(len(pico_maximo_por_dias[238:243]))
-# suma.append(len(pico_maximo_por_dias[243:245]))
-# suma.append(len(pico_maximo_por_dias[245:250]))
-# suma.append(len(pico_maximo_por_dias[250:252]))
-# suma.append(len(pico_maximo_por_dias[252:257]))
-# suma.append(len(pico_maximo_por_dias[257:259]))
-# suma.append(len(pico_maximo_por_dias[259:264]))
-# suma.append(len(pico_maximo_por_dias[264:266]))
-# suma.append(len(pico_maximo_por_dias[266:271]))
-# suma.append(len(pico_maximo_por_dias[271:273]))
-# suma.append(len(pico_maximo_por_dias[273:278]))
-# suma.append(len(pico_maximo_por_dias[278:280]))
-# suma.append(len(pico_maximo_por_dias[280:285]))
-# suma.append(len(pico_maximo_por_dias[285:287]))
-# suma.append(len(pico_maximo_por_dias[287:292]))
-# suma.append(len(pico_maximo_por_dias[292:294]))
-# suma.append(len(pico_maximo_por_dias[294:299]))
-# suma.append(len(pico_maximo_por_dias[299:301]))
-# suma.append(len(pico_maximo_por_dias[301:306]))
-# suma.append(len(pico_maximo_por_dias[306:308]))
-# suma.append(len(pico_maximo_por_dias[308:313]))
-# suma.append(len(pico_maximo_por_dias[313:315]))
-# suma.append(len(pico_maximo_por_dias[315:320]))
-# suma.append(len(pico_maximo_por_dias[320:322]))
-# suma.append(len(pico_maximo_por_dias[322:327]))
-# suma.append(len(pico_maximo_por_dias[327:329]))
-# suma.append(len(pico_maximo_por_dias[329:334]))
-# suma.append(len(pico_maximo_por_dias[334:336]))
-# suma.append(len(pico_maximo_por_dias[336:341]))
-# suma.append(len(pico_maximo_por_dias[341:343]))
-# suma.append(len(pico_maximo_por_dias[343:348]))
-# suma.append(len(pico_maximo_por_dias[348:350]))
-# suma.append(len(pico_maximo_por_dias[350:355]))
-# suma.append(len(pico_maximo_por_dias[355:357]))
-# suma.append(len(pico_maximo_por_dias[357:362]))
-# suma.append(len(pico_maximo_por_dias[362:364]))
-
-# print(sum(suma))
-
-
-#!Calcular el valor de los datos ---------------------------------------------------------------------------
+#!Calcular el valor de los datos ---MTTR y MTTF------------------------------------------------------------------------
 
 #todo CALCULANDO PRIMERAMENTE LOS VALORES DE MTTF, la generacion de los datos tiene que ser menor que 8784
 # TODOb datos que son los valores que se obtuvieron en la curva de caraga
 
 #TODO  Extraer la columna y convertirla en una lista sobre los datos de MTTF
-
-import pandas as pd
-import os
-from Script_Funciones import *
-import sympy as sp
-import numpy as np
-import random
 def Parametros_para_MTTF_MTTR(Nombre_excel:str,MTTF:str, MTTR:str):
         #! Establecer la recoleccion de datos de la tabla_4_---------------------------------------------------
 
@@ -613,6 +502,215 @@ def Parametros_para_MTTF_MTTR(Nombre_excel:str,MTTF:str, MTTR:str):
         lista_paramet_dis_exp_de_MTTR.append(parametro_dist_exp)
     print('lista_paramet_dis_exp_de_MTTR',lista_paramet_dis_exp_de_MTTR)
     print('lista_paramet_dis_exp_de_MTTF',lista_paramet_dis_exp_de_MTTF)
-    return lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR
+# * Calculo de los valores aleatorios y los tiempos para TTF y TTR -----------------------------------------------------
+#! Resultado de los tiempos de falla =======================
+    tiempos_de_falla_U12=[]
+    tiempos_de_falla_U20=[]
+    tiempos_de_falla_U50=[]
+    tiempos_de_falla_U76=[]
+    tiempos_de_falla_U100=[]
+    tiempos_de_falla_U155=[]
+    tiempos_de_falla_U197=[]
+    tiempos_de_falla_U350=[]
+    tiempos_de_falla_U400=[]
+#! Resultado de los tiempos de reparacion =======================
+    tiempos_de_reparacion_U12=[]
+    tiempos_de_reparacion_U20=[]
+    tiempos_de_reparacion_U50=[]
+    tiempos_de_reparacion_U76=[]
+    tiempos_de_reparacion_U100=[]
+    tiempos_de_reparacion_U155=[]
+    tiempos_de_reparacion_U197=[]
+    tiempos_de_reparacion_U350=[]
+    tiempos_de_reparacion_U400=[]
 
+#! CAlculo de cada Unidad:
 
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[0]))*1000
+        tiempos_de_falla_U12.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U12)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[1]))*1000
+        tiempos_de_falla_U20.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U20)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[2]))*1000
+        tiempos_de_falla_U50.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U50)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[3]))*1000
+        tiempos_de_falla_U76.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U76)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[4]))*1000
+        tiempos_de_falla_U100.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U100)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[5]))*1000
+        tiempos_de_falla_U155.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U155)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[6]))*1000
+        tiempos_de_falla_U197.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U197)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[7]))*1000
+        tiempos_de_falla_U350.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U350)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttf = (expon.ppf(j,lista_paramet_dis_exp_de_MTTF[0]))*1000
+        tiempos_de_falla_U400.append(resultado_en_hora_ttf)
+        if sum(tiempos_de_falla_U400)<=8736:
+                continue
+        else:break
+        
+    #! CAlculo de cada Unidad:
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[0]))*1000
+        tiempos_de_reparacion_U12.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U12)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[1]))*1000
+        tiempos_de_reparacion_U20.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U20)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[2]))*1000
+        tiempos_de_reparacion_U50.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U50)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[3]))*1000
+        tiempos_de_reparacion_U76.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U76)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[4]))*1000
+        tiempos_de_reparacion_U100.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U100)<=8736:
+                continue
+        else:break
+
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[5]))*1000
+        tiempos_de_reparacion_U155.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U155)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[6]))*1000
+        tiempos_de_reparacion_U197.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U197)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[7]))*1000
+        tiempos_de_reparacion_U350.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U350)<=8736:
+                continue
+        else:break
+        
+    datos_uniformes = np.random.rand(10000) # Generar datos aleatorios uniformemente distribuidos entre 0 y 1
+    for j in datos_uniformes:
+        resultado_en_hora_ttr = (expon.ppf(j,lista_paramet_dis_exp_de_MTTR[8]))*1000
+        tiempos_de_reparacion_U400.append(resultado_en_hora_ttr)
+        if sum(tiempos_de_reparacion_U400)<=8736:
+                continue
+        else:break
+    print("\n==================A CONTINUACION LOS TIEMPOS DE FALLA=======================================================\n")
+    print('tiempos_de_falla_U12=',tiempos_de_falla_U12)    
+    print('tiempos_de_falla_U20=',tiempos_de_falla_U20)    
+    print('tiempos_de_falla_U50=',tiempos_de_falla_U50)    
+    print('tiempos_de_falla_U76=',tiempos_de_falla_U76)    
+    print('tiempos_de_falla_U100=',tiempos_de_falla_U100)
+    print('tiempos_de_falla_U155=',tiempos_de_falla_U155)
+    print('tiempos_de_falla_U197=',tiempos_de_falla_U197)
+    print('tiempos_de_falla_U350=',tiempos_de_falla_U350)
+    print('tiempos_de_falla_U400=',tiempos_de_falla_U400)
+    print("\n==================A CONTINUACION LOS TIEMPOS DE REPARCION=======================================================\n")
+    print('tiempos_de_reparacion_U12=',tiempos_de_reparacion_U12)    
+    print('tiempos_de_reparacion_U20=',tiempos_de_reparacion_U20)    
+    print('tiempos_de_reparacion_U50=',tiempos_de_reparacion_U50)    
+    print('tiempos_de_reparacion_U76=',tiempos_de_reparacion_U76)    
+    print('tiempos_de_reparacion_U100=',tiempos_de_reparacion_U100)
+    print('tiempos_de_reparacion_U155=',tiempos_de_reparacion_U155)
+    print('tiempos_de_reparacion_U197=',tiempos_de_reparacion_U197)
+    print('tiempos_de_reparacion_U350=',tiempos_de_reparacion_U350)
+    print('tiempos_de_reparacion_U400=',tiempos_de_reparacion_U400)
+    
+    return lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,tiempos_de_falla_U12,tiempos_de_falla_U20,tiempos_de_falla_U50,tiempos_de_falla_U76,tiempos_de_falla_U100,tiempos_de_falla_U155,tiempos_de_falla_U197,tiempos_de_falla_U350,tiempos_de_falla_U400,tiempos_de_reparacion_U12,tiempos_de_reparacion_U20,tiempos_de_reparacion_U50,tiempos_de_reparacion_U76,tiempos_de_reparacion_U100,tiempos_de_reparacion_U155,tiempos_de_reparacion_U197,tiempos_de_reparacion_U350,tiempos_de_reparacion_U400
+
+# #TODO degradation_de las Unidades_sin_mantenimiento
+def funcion_escalon(ttf, ttr,valor_max_MW:int):
+    tiempo_total = 8761
+    resultado = []
+    acumulado = 0
+    escalon_actual = valor_max_MW
+    for i,j in zip(sorted(ttf),sorted(ttr)):
+            acumulado+=i
+            resultado.extend([escalon_actual] * int(i))
+            acumulado+=j
+            resultado.extend([0] * int(acumulado))
+            if acumulado>=8761:
+                        break
+            else:continue
+    plt.plot(range(len(resultado)), resultado)
+    plt.xlabel('Tiempo')
+    plt.ylabel('Valor del escalón')
+    plt.title('Función Escalón')
+    plt.show()
+    return resultado
