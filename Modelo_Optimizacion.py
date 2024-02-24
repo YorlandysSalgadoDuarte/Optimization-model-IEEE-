@@ -85,3 +85,16 @@ crear_subplot(9,valores_para_acotar_la_ventana_U400,'400')
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
+#!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
+##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
+tiempo_establ_por_IEEE_mantenimiento_U_12 =2*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_20 =2*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_50 =2*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_76 =3*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_100=3*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_155=4*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_197=4*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_350=5*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_400=6*7*24
+
+# funcion_escalon_para_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,valores_acotados_ventana_U12,12)

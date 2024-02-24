@@ -532,30 +532,47 @@ def funcion_escalon(ttf, ttr,valor_max_MW:int):
             else:continue
     return resultado
 
-#!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
-###########################################Semanas de Mant*dias_de_la_Semana*horas del dia
-tiempo_establ_por_IEEE_mantenimiento_U_12 =2*7*24
-tiempo_sin_mantenimiento_U_12=[]
-tiempo_establ_por_IEEE_mantenimiento_U_20 =2*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_50 =2*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_76 =3*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_100=3*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_155=4*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_197=4*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_350=5*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_400=6*7*24
 
-def funcion_escalon(tiempo_establ_por_IEEE_mantenimiento_U_12, ttr,valor_max_MW:int):
-    #tiempo_total = 8736
-    resultado = []
-    acumulado = 0
-    escalon_actual = valor_max_MW
-    for i,j in zip(tiempo_establ_por_IEEE_mantenimiento_U_12,sorted(ttr)):
-            acumulado+=i
-            resultado.extend([escalon_actual] * int(i))
-            acumulado+=j
-            resultado.extend([0] * int(acumulado))
-            if acumulado>=8736:
-                        break
-            else:continue
-    return resultado
+
+import random
+
+def para_establecer_mantenimiento(numero_de_semanas:int,meses_entre_mantenimientos,unidad_en_MW:int):
+    desicion=str(input("quieres dividir las  semanas en intervalos?>S/N"))
+    lista_de_valores=[0]*8736
+    horas_de_1_sem_mant=7*24
+    
+    #para una semana 
+    
+    
+    
+    
+    
+    
+    
+#     # # Crear una lista inicial de 8736 ceros
+# lista = [0] * 8736
+
+# # Número de veces que se quiere insertar el 12 en la lista
+# num_inserciones = 10  # Puedes ajustar este valor según tus necesidades
+
+# # Número de ceros que deben ir entre cada 12
+# ceros_entre_12 = 7
+
+# # Inicializar un índice
+# indice = 0
+
+# # Bucle para realizar las inserciones
+# for _ in range(num_inserciones):
+#     # Insertar el 12 en la posición actual del índice
+#     lista[indice] = 12
+
+#     # Mover el índice a la siguiente posición después del 12
+#     indice += 1
+
+#     # Insertar ceros entre cada 12
+#     for _ in range(ceros_entre_12):
+#         lista[indice] = 0
+#         indice += 1
+
+# # Imprimir la lista resultante
+# print(lista)
