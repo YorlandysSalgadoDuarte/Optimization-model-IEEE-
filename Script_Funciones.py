@@ -541,9 +541,9 @@ def crear_subplot(indice, datos, etiqueta):
     
     
 def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW):
-    lista = [0] * 8736
+    lista = [valor_en_MW] * 8736
     num_inserciones_por_semanas=[1]*24*7 # se pone una lista para no sumer de rorma ascendente
-    ceros_entre_12 =[1]*(numero_de_meses_entre_cada_mantenimiento)*24*7*4
+    en_funcionamiento =[1]*(numero_de_meses_entre_cada_mantenimiento)*24*7*4
     contador=0
     # # Inicializar un índice
     indice = 0 #*-------------------------------- Este es el valor que va  a potimizasrle modelo de Algoritmo genertico-------------------------------
@@ -553,11 +553,11 @@ def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_
         try:
             for i in num_inserciones_por_semanas:
             # Insertar el 12 en la posición actual del índice
-                lista[contador+i-1] = (valor_en_MW)
+                lista[contador+i-1] = 0
                 contador+=indice+i
             # Insertar ceros entre cada 12
-            for _ in ceros_entre_12:
-                lista[contador-1] = 0
+            for _ in en_funcionamiento:
+                lista[contador-1] = (valor_en_MW)
                 contador+=1
             n=n-1
         except Exception as e:
@@ -565,7 +565,6 @@ def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_
             break
     # print(lista,len(lista))
     return lista
-
 #*******************************AND ENTRE VALORES********************************************
 def AND_entre_valores(valores1, valores2, unidad_en_MW):
     vector_resultante = []
@@ -583,5 +582,3 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
 
     print("Resultado de la operación AND con valores específicos:", vector_resultante)
     return vector_resultante
-
-

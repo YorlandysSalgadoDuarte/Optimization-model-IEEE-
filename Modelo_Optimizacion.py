@@ -52,7 +52,6 @@ print('Calculo de ttr_U155',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,5,100))
 print('Calculo de ttr_U197',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,6,100))#)U197
 print('Calculo de ttr_U350',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,7,100))#)U350
 print('Calculo de ttr_U400',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8,100))#U400
-
 # *************************Ventana de valores hasta las 8736 horas****************************************
 valores_acotados_ventana_U12 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 0, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 0, 100), 12)[:8736]
 valores_acotados_ventana_U20 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 1, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 1, 100), 20)[:8736]
@@ -64,7 +63,6 @@ valores_acotados_ventana_U197= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_
 valores_acotados_ventana_U350= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 7, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 7, 100), 350)[:8736]
 valores_para_acotar_la_ventana_U400 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 8, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8, 400), 12)[:8736]
 # *************************Función para crear un subplot dado un índice****************************************
-
 # Obtener datos para cada unidad
 # Crear subgráficos para cada unidad
 plt.figure(figsize=(15, 15))
@@ -137,7 +135,7 @@ AND_entre_valores(valores_acotados_ventana_U350,funcion_de_mantenimiento(tiempo_
 crear_subplot(8, AND_entre_valores(valores_acotados_ventana_U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,3,350),350),'350')
 #**********************************UNIDAD 400 *************************
 AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400)
-crear_subplot(, AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400),'400')
+crear_subplot(9, AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400),'400')
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
