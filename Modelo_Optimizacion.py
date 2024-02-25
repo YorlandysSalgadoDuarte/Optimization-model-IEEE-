@@ -43,7 +43,7 @@ print('Calculo de ttf_U197',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,6,100))
 print('Calculo de ttf_U350',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,7,100))#U350
 print('Calculo de ttf_U400',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,8,100))#U400
 print('\n#***************************Valores de ttr aleatorios**************************\n')
-print('Calculo de ttr_U12',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,0,100))#)U12 
+print('Calculo de ttr_U12',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,0,100))#)U12
 print('Calculo de ttr_U20',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,1,100))#U20
 print('Calculo de ttr_U50',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,2,100))#U50
 print('Calculo de ttr_U76',calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,3,100))#U76
@@ -94,18 +94,8 @@ tiempo_establ_por_IEEE_mantenimiento_U_350=5
 tiempo_establ_por_IEEE_mantenimiento_U_400=6
 
 #*Valores de mantenimiento discretizados**********************************
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,12)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_20,5,20)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_50,5,50)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_76,2,76)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_100,2,100)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_155,2,155)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_197,2,197)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,2,350)
-funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,1,400)
-
 plt.figure(figsize=(15, 15))
-crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,12),'12')
+crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,0,12),'12')
 crear_subplot(2,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,20),'20')
 crear_subplot(3,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,50),'50')
 crear_subplot(4,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,76),'76')
