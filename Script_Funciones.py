@@ -532,7 +532,15 @@ def funcion_escalon(ttf, ttr,valor_max_MW:int):
             else:continue
     return resultado
 
-def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW:int):
+def crear_subplot(indice, datos, etiqueta):
+    plt.subplot(3, 3, indice)
+    plt.plot(range(len(datos)), datos)
+    plt.title(f'UNIDAD {etiqueta}',fontsize=5)
+    plt.xlabel('Tiempo',fontsize=5)
+    plt.ylabel('Valor del escalón',fontsize=10)
+    
+    
+def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW):
     lista = [0] * 8736
     num_inserciones_por_semanas=[1]*24*7 # se pone una lista para no sumer de rorma ascendente
     ceros_entre_12 =[1]*(numero_de_meses_entre_cada_mantenimiento)*24*7*4
@@ -540,26 +548,21 @@ def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_
     # # Inicializar un índice
     indice = 0 #*-------------------------------- Este es el valor que va  a potimizasrle modelo de Algoritmo genertico-------------------------------
     # Bucle para realizar las inserciones
-    n=(cantidad_de_semanas_de_mant_por_dato)#numero de semanas de mantenimiento
+    n=(cantidad_de_semanas_de_mant_por_dato+1)#numero de semanas de mantenimiento
     while n!=1:
-        for i in num_inserciones_por_semanas:
-        # Insertar el 12 en la posición actual del índice
-            lista[contador+i-1] = (valor_en_MW)
-            contador+=indice+i
-        # Insertar ceros entre cada 12
-        for _ in ceros_entre_12:
-            lista[contador-1] = 1
-            contador+=1
-            print(contador)
-        n=n-1
-        if contador>8736:
-            print('la configuración de mantenimiento es erronea,cambie los intervalos')
+        try:
+            for i in num_inserciones_por_semanas:
+            # Insertar el 12 en la posición actual del índice
+                lista[contador+i-1] = (valor_en_MW)
+                contador+=indice+i
+            # Insertar ceros entre cada 12
+            for _ in ceros_entre_12:
+                lista[contador-1] = 0
+                contador+=1
+            n=n-1
+        except Exception as e:
+            print("No es posible esa cantidad de meses intermedios vuelva a intentarlo")
             break
-    print(lista)
+    # print(lista,len(lista))
+    return lista
 
-def crear_subplot(indice, datos, etiqueta):
-    plt.subplot(3, 3, indice)
-    plt.plot(range(len(datos)), datos)
-    plt.title(f'UNIDAD {etiqueta}',fontsize=5)
-    plt.xlabel('Tiempo',fontsize=5)
-    plt.ylabel('Valor del escalón',fontsize=10)

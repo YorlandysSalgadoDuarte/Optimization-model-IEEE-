@@ -1,5 +1,6 @@
  #************************************* Librerias***********************************************************************************************************************************************************************
 from Script_Funciones import *
+from Script_Funciones import crear_subplot
 from Script_Funciones import Parametros_para_MTTF_MTTR
 import numpy as np
 from scipy.stats import expon
@@ -63,6 +64,7 @@ valores_acotados_ventana_U197= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_
 valores_acotados_ventana_U350= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 7, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 7, 100), 350)[:8736]
 valores_para_acotar_la_ventana_U400 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 8, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8, 400), 12)[:8736]
 # *************************Función para crear un subplot dado un índice****************************************
+
 # Obtener datos para cada unidad
 # Crear subgráficos para cada unidad
 plt.figure(figsize=(15, 15))
@@ -81,14 +83,38 @@ plt.tight_layout()
 plt.show()
 #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
 ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
-tiempo_establ_por_IEEE_mantenimiento_U_12 =2*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_20 =2*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_50 =2*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_76 =3*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_100=3*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_155=4*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_197=4*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_350=5*7*24
-tiempo_establ_por_IEEE_mantenimiento_U_400=6*7*24
+tiempo_establ_por_IEEE_mantenimiento_U_12 =2
+tiempo_establ_por_IEEE_mantenimiento_U_20 =2
+tiempo_establ_por_IEEE_mantenimiento_U_50 =2
+tiempo_establ_por_IEEE_mantenimiento_U_76 =3
+tiempo_establ_por_IEEE_mantenimiento_U_100=3
+tiempo_establ_por_IEEE_mantenimiento_U_155=4
+tiempo_establ_por_IEEE_mantenimiento_U_197=4
+tiempo_establ_por_IEEE_mantenimiento_U_350=5
+tiempo_establ_por_IEEE_mantenimiento_U_400=6
 
-# funcion_escalon_para_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,valores_acotados_ventana_U12,12)
+#*Valores de mantenimiento discretizados**********************************
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,12)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_20,5,20)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_50,5,50)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_76,2,76)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_100,2,100)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_155,2,155)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_197,2,197)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,2,350)
+funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,1,400)
+
+plt.figure(figsize=(15, 15))
+crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,12),'12')
+crear_subplot(2,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,20),'20')
+crear_subplot(3,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,50),'50')
+crear_subplot(4,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,76),'76')
+crear_subplot(5,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,100),'100')
+crear_subplot(6,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,155),'155')
+crear_subplot(7,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,197),'197')
+crear_subplot(8,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,350),'350')
+crear_subplot(9,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,1,400),'400')
+# Ajustar el diseño para evitar superposiciones
+plt.tight_layout()
+# Mostrar todas las gráficas en una sola ventana
+plt.show()
