@@ -566,3 +566,22 @@ def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_
     # print(lista,len(lista))
     return lista
 
+#*******************************AND ENTRE VALORES********************************************
+def AND_entre_valores(valores1, valores2, unidad_en_MW):
+    vector_resultante = []
+
+    # Verifica que ambas listas tengan la misma longitud
+    if len(valores1) != len(valores2):
+        raise ValueError("Las listas deben tener la misma longitud")
+
+    for v1, v2 in zip(valores1, valores2):
+        resultado_and = v1 and v2
+        if resultado_and:
+            vector_resultante.append(unidad_en_MW)
+        else:
+            vector_resultante.append(0)
+
+    print("Resultado de la operación AND con valores específicos:", vector_resultante)
+    return vector_resultante
+
+

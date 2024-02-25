@@ -1,7 +1,7 @@
  #************************************* Librerias***********************************************************************************************************************************************************************
 from Script_Funciones import *
 from Script_Funciones import crear_subplot
-from Script_Funciones import Parametros_para_MTTF_MTTR
+from Script_Funciones import Parametros_para_MTTF_MTTR,AND_entre_valores
 import numpy as np
 from scipy.stats import expon
 #  #!Encontrar el pico de la demanda---------------------------------------------
@@ -95,7 +95,7 @@ tiempo_establ_por_IEEE_mantenimiento_U_400=6
 
 #*Valores de mantenimiento discretizados**********************************
 plt.figure(figsize=(15, 15))
-crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,0,12),'12')
+crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,3,12),'12')
 crear_subplot(2,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,20),'20')
 crear_subplot(3,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,50),'50')
 crear_subplot(4,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,76),'76')
@@ -104,6 +104,40 @@ crear_subplot(6,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_
 crear_subplot(7,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,197),'197')
 crear_subplot(8,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,5,350),'350')
 crear_subplot(9,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,1,400),'400')
+# Ajustar el diseño para evitar superposiciones
+plt.tight_layout()
+# Mostrar todas las gráficas en una sola ventana
+plt.show()
+
+#*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
+#**********************************UNIDAD 12 *************************
+AND_entre_valores(valores_acotados_ventana_U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,3,12),12)
+crear_subplot(1, AND_entre_valores(valores_acotados_ventana_U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,3,12),12),'12')
+#**********************************UNIDAD 20 *************************
+AND_entre_valores(valores_acotados_ventana_U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_20,3,20),20)
+crear_subplot(2, AND_entre_valores(valores_acotados_ventana_U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_20,3,20),20),'20')
+#**********************************UNIDAD 50 *************************
+AND_entre_valores(valores_acotados_ventana_U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_50,3,50),50)
+crear_subplot(3, AND_entre_valores(valores_acotados_ventana_U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_50,3,50),50),'50')
+# Ajustar el diseño para evitar superposiciones
+#**********************************UNIDAD 76 *************************
+AND_entre_valores(valores_acotados_ventana_U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_76,3,76),76)
+crear_subplot(4, AND_entre_valores(valores_acotados_ventana_U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_76,3,76),76),'76')
+#**********************************UNIDAD 100 *************************
+AND_entre_valores(valores_acotados_ventana_U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_100,3,100),100)
+crear_subplot(5, AND_entre_valores(valores_acotados_ventana_U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_100,3,100),100),'100')
+#**********************************UNIDAD 155 *************************
+AND_entre_valores(valores_acotados_ventana_U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_155,3,155),155)
+crear_subplot(6, AND_entre_valores(valores_acotados_ventana_U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_155,3,155),155),'155')
+#**********************************UNIDAD 197 *************************
+AND_entre_valores(valores_acotados_ventana_U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_197,3,197),197)
+crear_subplot(7, AND_entre_valores(valores_acotados_ventana_U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_197,3,197),197),'197')
+#**********************************UNIDAD 350 *************************
+AND_entre_valores(valores_acotados_ventana_U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,3,350),350)
+crear_subplot(8, AND_entre_valores(valores_acotados_ventana_U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,3,350),350),'350')
+#**********************************UNIDAD 400 *************************
+AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400)
+crear_subplot(, AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400),'400')
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
