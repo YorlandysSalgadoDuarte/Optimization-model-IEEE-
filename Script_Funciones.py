@@ -532,47 +532,34 @@ def funcion_escalon(ttf, ttr,valor_max_MW:int):
             else:continue
     return resultado
 
+def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW:int):
+    lista = [0] * 8736
+    num_inserciones_por_semanas=[1]*24*7 # se pone una lista para no sumer de rorma ascendente
+    ceros_entre_12 =[1]*(numero_de_meses_entre_cada_mantenimiento)*24*7*4
+    contador=0
+    # # Inicializar un índice
+    indice = 0 #*-------------------------------- Este es el valor que va  a potimizasrle modelo de Algoritmo genertico-------------------------------
+    # Bucle para realizar las inserciones
+    n=(cantidad_de_semanas_de_mant_por_dato)#numero de semanas de mantenimiento
+    while n!=1:
+        for i in num_inserciones_por_semanas:
+        # Insertar el 12 en la posición actual del índice
+            lista[contador+i-1] = (valor_en_MW)
+            contador+=indice+i
+        # Insertar ceros entre cada 12
+        for _ in ceros_entre_12:
+            lista[contador-1] = 1
+            contador+=1
+            print(contador)
+        n=n-1
+        if contador>8736:
+            print('la configuración de mantenimiento es erronea,cambie los intervalos')
+            break
+    print(lista)
 
-
-import random
-
-def para_establecer_mantenimiento(numero_de_semanas:int,meses_entre_mantenimientos,unidad_en_MW:int):
-    desicion=str(input("quieres dividir las  semanas en intervalos?>S/N"))
-    lista_de_valores=[0]*8736
-    horas_de_1_sem_mant=7*24
-    
-    #para una semana 
-    
-    
-    
-    
-    
-    
-    
-#     # # Crear una lista inicial de 8736 ceros
-# lista = [0] * 8736
-
-# # Número de veces que se quiere insertar el 12 en la lista
-# num_inserciones = 10  # Puedes ajustar este valor según tus necesidades
-
-# # Número de ceros que deben ir entre cada 12
-# ceros_entre_12 = 7
-
-# # Inicializar un índice
-# indice = 0
-
-# # Bucle para realizar las inserciones
-# for _ in range(num_inserciones):
-#     # Insertar el 12 en la posición actual del índice
-#     lista[indice] = 12
-
-#     # Mover el índice a la siguiente posición después del 12
-#     indice += 1
-
-#     # Insertar ceros entre cada 12
-#     for _ in range(ceros_entre_12):
-#         lista[indice] = 0
-#         indice += 1
-
-# # Imprimir la lista resultante
-# print(lista)
+def crear_subplot(indice, datos, etiqueta):
+    plt.subplot(3, 3, indice)
+    plt.plot(range(len(datos)), datos)
+    plt.title(f'UNIDAD {etiqueta}',fontsize=5)
+    plt.xlabel('Tiempo',fontsize=5)
+    plt.ylabel('Valor del escalón',fontsize=10)

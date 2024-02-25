@@ -63,12 +63,6 @@ valores_acotados_ventana_U197= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_
 valores_acotados_ventana_U350= funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 7, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR, 7, 100), 350)[:8736]
 valores_para_acotar_la_ventana_U400 = funcion_escalon(calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF, 8, 100), calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTR,8, 400), 12)[:8736]
 # *************************Función para crear un subplot dado un índice****************************************
-def crear_subplot(indice, datos, etiqueta):
-    plt.subplot(3, 3, indice)
-    plt.plot(range(len(datos)), datos)
-    plt.title(f'UNIDAD {etiqueta}',fontsize=5)
-    plt.xlabel('Tiempo',fontsize=5)
-    plt.ylabel('Valor del escalón',fontsize=10)
 # Obtener datos para cada unidad
 # Crear subgráficos para cada unidad
 plt.figure(figsize=(15, 15))
