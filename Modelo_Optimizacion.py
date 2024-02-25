@@ -140,3 +140,11 @@ crear_subplot(9, AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_d
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
+
+#******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
+resultado_suma = [a+b+c+d+e+f+g+h+i for a,b,c,d,e,f,g,h,i in zip(AND_entre_valores(valores_acotados_ventana_U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_12,3,12),12),AND_entre_valores(valores_acotados_ventana_U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_20,3,20),20),AND_entre_valores(valores_acotados_ventana_U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_76,3,76),76),AND_entre_valores(valores_acotados_ventana_U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_100,3,100),100),AND_entre_valores(valores_acotados_ventana_U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_155,3,155),155),AND_entre_valores(valores_acotados_ventana_U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_197,3,197),197),AND_entre_valores(valores_acotados_ventana_U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_350,3,350),350),AND_entre_valores(valores_para_acotar_la_ventana_U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_U_400,3,400),400))]
+print(resultado_suma)
+# Crear un gráfico de línea
+plt.plot(resultado_suma)
+# Mostrar el gráfico
+plt.show()
