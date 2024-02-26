@@ -456,11 +456,6 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,pic
             solv1=i*(j/100)
             pico_diario.append(solv1)
     print(pico_diario,len(pico_diario))
-   
-    # Graficar la lista
-    plt.plot(pico_diario)
-    # Mostrar el gráfico
-    plt.show()
     return pico_diario
 #!Calcular el valor de los datos ---MTTR y MTTF------------------------------------------------------------------------
 
@@ -533,11 +528,11 @@ def funcion_escalon(ttf, ttr,valor_max_MW:int):
     return resultado
 
 def crear_subplot(indice, datos, etiqueta):
-    plt.subplot(3, 3, indice)
+    plt.subplot(6,6 , indice)
     plt.plot(range(len(datos)), datos)
     plt.title(f'UNIDAD {etiqueta}',fontsize=5)
     plt.xlabel('Tiempo',fontsize=5)
-    plt.ylabel('Valor del escalón',fontsize=10)
+    plt.ylabel('Valor del escalón',fontsize=5)
     
     
 def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW):
