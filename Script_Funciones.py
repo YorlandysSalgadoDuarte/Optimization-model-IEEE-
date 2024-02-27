@@ -535,31 +535,63 @@ def crear_subplot(indice, datos, etiqueta):
     plt.ylabel('Valor del escalón',fontsize=5)
     
     
-def funcion_de_mantenimiento(cantidad_de_semanas_de_mant_por_dato:int,numero_de_meses_entre_cada_mantenimiento:int,valor_en_MW):
-    lista = [valor_en_MW] * 8736
-    num_inserciones_por_semanas=[1]*24*7 # se pone una lista para no sumer de rorma ascendente
-    en_funcionamiento =[1]*(numero_de_meses_entre_cada_mantenimiento)*24*7*4
-    contador=0
-    # # Inicializar un índice
-    indice = 0 #*-------------------------------- Este es el valor que va  a potimizasrle modelo de Algoritmo genertico-------------------------------
-    # Bucle para realizar las inserciones
-    n=(cantidad_de_semanas_de_mant_por_dato+1)#numero de semanas de mantenimiento
-    while n!=1:
-        try:
-            for i in num_inserciones_por_semanas:
-            # Insertar el 12 en la posición actual del índice
-                lista[contador+i-1] = 0
-                contador+=indice+i
-            # Insertar ceros entre cada 12
-            for _ in en_funcionamiento:
-                lista[contador-1] = (valor_en_MW)
-                contador+=1
-            n=n-1
-        except Exception as e:
-            print("No es posible esa cantidad de meses intermedios vuelva a intentarlo")
-            break
-    # print(lista,len(lista))
-    return lista
+def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, meses_entre_mantenimiento: int, valor_en_MW, inicio_mantenimiento_hora_year: int = 0):
+    try:
+        lista = [valor_en_MW] * 8736
+        horas_entre_mantenimiento = semanas_de_mant_por_dato * 24
+        contador = 0
+
+        # Asegurar que semanas_de_mant_por_dato no sea mayor que la cantidad total de semanas en el año
+        semanas_en_ano = 52
+        if semanas_de_mant_por_dato > semanas_en_ano:
+            raise ValueError("La cantidad de semanas de mantenimiento no puede ser mayor que la cantidad total de semanas en el año.")
+
+        # Asegurar que el espacio entre mantenimientos sea válido
+        if meses_entre_mantenimiento * 4 * 7 * 24 >= len(lista):
+            raise ValueError("El espacio entre mantenimientos excede la longitud de la lista. Por favor, ingrese nuevos valores.")
+
+        inicio_mantenimiento_indice = inicio_mantenimiento_hora_year % len(lista)
+
+        for _ in range(semanas_de_mant_por_dato):
+            # Establecer mantenimiento en las próximas semanas
+            for i in range(horas_entre_mantenimiento):
+                lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
+
+            # Restablecer el valor_en_MW después de las semanas de mantenimiento
+            lista[(contador + inicio_mantenimiento_indice + horas_entre_mantenimiento) % len(lista)] = valor_en_MW
+
+            contador += horas_entre_mantenimiento + 1  # Moverse a la próxima posición después del mantenimiento
+
+            # Actualizar el índice de inicio para la próxima semana de mantenimiento
+            inicio_mantenimiento_indice += meses_entre_mantenimiento * 4 * 7 * 24
+
+        return lista
+    except ValueError as e:
+        print(f"Error: {e}")
+        raise  # Re-levanta la excepción para que el usuario pueda ingresar nuevos valores
+
+
+# Llamada a la función con inicio_mantenimiento_hora_year proporcionado por el usuario
+try:
+    resultado = funcion_de_mantenimiento(2, 5, 12, inicio_mantenimiento_hora_year=4368)
+    print(resultado)
+except ValueError:
+    # Manejar el error y solicitar nuevos valores
+    print("Por favor, ingrese nuevos valores.")
+
+# Llamada a la función sin proporcionar inicio_mantenimiento_hora_year (utilizará el valor predeterminado 0)
+try:
+    resultado = funcion_de_mantenimiento(2, 5, 12)
+    print(resultado)
+except ValueError:
+    # Manejar el error y solicitar nuevos valores
+    print("Por favor, ingrese nuevos valores.")
+
+
+
+
+
+
 #*******************************AND ENTRE VALORES********************************************
 def AND_entre_valores(valores1, valores2, unidad_en_MW):
     vector_resultante = []
