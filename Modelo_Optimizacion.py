@@ -1,9 +1,9 @@
  #************************************* Librerias***********************************************************************************************************************************************************************
-from Script_Funciones import *
-from Script_Funciones import crear_subplot
-from Script_Funciones import Parametros_para_MTTF_MTTR,AND_entre_valores
+from New_script_funciones import Parametros_para_MTTF_MTTR,crear_subplot,calculo_demanda,calulo_ttf_ttr,funcion_escalon,funcion_de_mantenimiento,AND_entre_valores
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import expon
+import matplotlib.pyplot as plt
 #  #!Encontrar el pico de la demanda---------------------------------------------
 #? En la tabla 5 del documento queda claro cual es el pico maximo de la demanda analizada 
 pico_maximo=2850 # esta dado en MW
@@ -130,8 +130,8 @@ crear_subplot(32,valores_para_acotar_la_ventana_2U400,'400')
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
-#!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
-##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
+# #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
+# ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
 tiempo_establ_por_IEEE_mantenimiento_1U_12 =2
 tiempo_establ_por_IEEE_mantenimiento_2U_12 =2
 tiempo_establ_por_IEEE_mantenimiento_3U_12 =2
@@ -207,7 +207,7 @@ plt.show()
 
 #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
 #**********************************UNIDAD 12 *************************
-AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),'12')
+AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12)
 crear_subplot(1, AND_entre_valores(valores_acotados_ventana_1U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,5,12),12),'12')
 
 AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12)
