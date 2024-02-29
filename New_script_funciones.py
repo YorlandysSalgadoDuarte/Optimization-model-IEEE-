@@ -646,5 +646,6 @@ def riesgo(demanda:list,generacion:list):
                         break
                     elif error>0.001:
                         print('error>',error)
+                        print(f'el valor esperado es de{media} MW')
                         continue
         return media,error
