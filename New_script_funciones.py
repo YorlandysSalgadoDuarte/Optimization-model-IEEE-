@@ -7,6 +7,10 @@ import sympy as sp
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+from random import Random
+from time import time
+import inspyred
+import math
 #***********************************************************Calculo_de_la_demanda******************************************************************
 def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,
                     pico_maximo_por_dias_en_porciento:int,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52:list,
@@ -491,7 +495,7 @@ def calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF_o_MTTR, n, valores_randon):
     tiempos_de_falla_o_repracion = []
     
     for _ in range(valores_randon):
-        resultado_en_tasa = expon.ppf(lista_paramet_dis_exp_de_MTTF_o_MTTR[n], np.random.rand()*10)
+        resultado_en_tasa = expon.ppf(lista_paramet_dis_exp_de_MTTF_o_MTTR[n], np.random.rand()*4)
         resultado_en_horas = resultado_en_tasa / lista_paramet_dis_exp_de_MTTF_o_MTTR[n]  # Corrección
         # print('resultado_en_hora_ttf =', resultado_en_horas)
         
@@ -571,5 +575,76 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
     print("Resultado de la operación AND con valores específicos:", vector_resultante)
     return vector_resultante
 
+#******************************Algoritmo Genetico para minimizar la solucion del problema *******************************************************
+# def main(problema, prng=None, display=False):    
+#     if prng is None:
+#         prng = Random()
+#         prng.seed(time()) 
+        
+#     points = [(110.0, 225.0), (161.0, 280.0), (325.0, 554.0), (490.0, 285.0), 
+#               (157.0, 443.0), (283.0, 379.0), (397.0, 566.0), (306.0, 360.0), 
+#               (343.0, 110.0), (552.0, 199.0)]
+#     weights = [[0 for _ in range(len(points))] for _ in range(len(points))]
+#     for i, p in enumerate(points):
+#         for j, q in enumerate(points):
+#             weights[i][j] = math.sqrt((p[0] - q[0])**2 + (p[1] - q[1])**2)
+              
+#     problem = inspyred.benchmarks.TSP(weights)
+#     ea = inspyred.ec.EvolutionaryComputation(prng)
+#     ea.selector = inspyred.ec.selectors.tournament_selection
+#     ea.variator = [inspyred.ec.variators.partially_matched_crossover, 
+#                    inspyred.ec.variators.inversion_mutation]
+#     ea.replacer = inspyred.ec.replacers.generational_replacement
+#     ea.terminator = inspyred.ec.terminators.generation_termination
+#     final_pop = ea.evolve(generator=problem.generator, 
+#                           evaluator=evaluador, 
+#                           bounder=problem.bounder,
+#                           maximize=False, 
+#                           pop_size=100, 
+#                           max_generations=50,
+#                           tournament_size=5,
+#                           num_selected=100,
+#                           num_elites=1)
+    
+#     if display:
+#         best = min(ea.population)
+#         return best.candidate
+            
+# def evaluador(candidato):
+#     return problema(candidato),
 
-
+# if __name__ == '__main__':
+#     def problema(x):
+#         # Definir tu problema de minimización aquí
+#         # La función debe devolver el valor de la función objetivo a minimizar
+#         # basado en los valores de las variables de decisión en la lista `x`
+#         pass
+    
+#     resultado = main(problema, display=True)
+#     print('Mejor Solución:', resultado)
+#**********************************FUNCION DE Riesgo Utilizando montecarlos***********************************************************************
+def riesgo(demanda:list,generacion:list):
+        riesgo=[]
+        error=None
+        while True:
+            for i,j in zip(demanda,generacion):
+                if j>i:
+                    solv=j-i
+                    riesgo.append(solv)
+                if i>=j:
+                    solv=0
+                    riesgo.append(solv)
+#?calculo de varianza en este caso para establecer el patron de parada segun montecarlos 
+                    suma = sum(riesgo)
+                    media = suma / len(riesgo)
+                    suma_cuadrados_diferencias = sum((x - media) ** 2 for x in riesgo)
+                    varianza = suma_cuadrados_diferencias / len(riesgo)
+#?Valor del error para el criterio de parada
+                    error=varianza/(math.sqrt(len(riesgo)))
+                    if error<=0.001 and error>0:
+                        print("la media del valor de riesgo es:>",media)
+                        break
+                    elif error>0.001:
+                        print('error>',error)
+                        continue
+        return media,error
