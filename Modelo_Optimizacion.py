@@ -345,3 +345,4 @@ plt.show()
 
 #*****************************Calculo de riesgo con lo que tenenos sin implementar le modelo de optimizacion**********************************
 riesgo(pico_diario,resultado_suma)
+error_(riesgo(pico_diario,resultado_suma)):

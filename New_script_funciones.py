@@ -624,28 +624,35 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
 #     print('Mejor Solución:', resultado)
 #**********************************FUNCION DE Riesgo Utilizando montecarlos***********************************************************************
 def riesgo(demanda:list,generacion:list):
-        riesgo=[]
-        error=None
-        while True:
-            for i,j in zip(demanda,generacion):
-                if j>i:
-                    solv=j-i
-                    riesgo.append(solv)
-                if i>=j:
-                    solv=0
-                    riesgo.append(solv)
+    #print(len(demanda),len(generacion))
+    riesgo=[]
+    error=None
+    for i,j in zip(demanda,generacion):
+        if j>=i:
+            solv=0
+            riesgo.append(solv)
+        if i>=j:
+            solv=i-j
+            riesgo.append(solv)
+    suma_de_riesgo=sum(riesgo)
+    return suma_de_riesgo
+
+def error(suma_de_riesgo:float):
 #?calculo de varianza en este caso para establecer el patron de parada segun montecarlos 
-                    suma = sum(riesgo)
-                    media = suma / len(riesgo)
-                    suma_cuadrados_diferencias = sum((x - media) ** 2 for x in riesgo)
-                    varianza = suma_cuadrados_diferencias / len(riesgo)
+    vector_riesgo=[]
+    error=[]
+    while  True:
+        suma_de_riesgo = riesgo
+        vector_riesgo.append(suma_de_riesgo)
+        valor_esperado_riesgo = np.mean(vector_riesgo)
+        desviacion_estandar = np.std(vector_riesgo)
+        error=desviacion_estandar/(valor_esperado_riesgo*math.sqrt(len(vector_riesgo)))
 #?Valor del error para el criterio de parada
-                    error=varianza/(math.sqrt(len(riesgo)))
-                    if error<=0.001 and error>0:
-                        print("la media del valor de riesgo es:>",media)
-                        break
-                    elif error>0.001:
-                        print('error>',error)
-                        print(f'el valor esperado es de{media} MW')
-                        continue
-        return media,error
+        if error<=0.01 and desviacion_estandar>0:
+            print("el valor_esperado_riesgo del valor de riesgo es:> ",valor_esperado_riesgo)
+            break
+        print('error>',error)
+        print(f'el valor esperado es de {valor_esperado_riesgo} MW')
+            
+    return valor_esperado_riesgo,error
+
