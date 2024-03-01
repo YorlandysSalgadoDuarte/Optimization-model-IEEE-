@@ -579,10 +579,10 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
 # def main(problema, prng=None, display=False):    
 #     if prng is None:
 #         prng = Random()
-#         prng.seed(time()) 
+#         prng.seed(time())
         
-#     points = [(110.0, 225.0), (161.0, 280.0), (325.0, 554.0), (490.0, 285.0), 
-#               (157.0, 443.0), (283.0, 379.0), (397.0, 566.0), (306.0, 360.0), 
+#     points = [(110.0, 225.0), (161.0, 280.0), (325.0, 554.0), (490.0, 285.0),
+#               (157.0, 443.0), (283.0, 379.0), (397.0, 566.0), (306.0, 360.0),
 #               (343.0, 110.0), (552.0, 199.0)]
 #     weights = [[0 for _ in range(len(points))] for _ in range(len(points))]
 #     for i, p in enumerate(points):
@@ -626,7 +626,6 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
 def riesgo(demanda:list,generacion:list):
     #print(len(demanda),len(generacion))
     riesgo=[]
-    error=None
     for i,j in zip(demanda,generacion):
         if j>=i:
             solv=0
@@ -635,6 +634,7 @@ def riesgo(demanda:list,generacion:list):
             solv=i-j
             riesgo.append(solv)
     suma_de_riesgo=sum(riesgo)
+    print('suma_de_riesgo=',suma_de_riesgo)
     return suma_de_riesgo
 
 def error(suma_de_riesgo:float):
@@ -642,7 +642,6 @@ def error(suma_de_riesgo:float):
     vector_riesgo=[]
     error=[]
     while  True:
-        suma_de_riesgo = riesgo
         vector_riesgo.append(suma_de_riesgo)
         valor_esperado_riesgo = np.mean(vector_riesgo)
         desviacion_estandar = np.std(vector_riesgo)
@@ -653,6 +652,5 @@ def error(suma_de_riesgo:float):
             break
         print('error>',error)
         print(f'el valor esperado es de {valor_esperado_riesgo} MW')
-            
-    return valor_esperado_riesgo,error
+    return valor_esperado_riesgo
 

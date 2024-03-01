@@ -1,5 +1,5 @@
  #************************************* Librerias***********************************************************************************************************************************************************************
-from New_script_funciones import Parametros_para_MTTF_MTTR,crear_subplot,calculo_demanda,calulo_ttf_ttr,funcion_escalon,funcion_de_mantenimiento,AND_entre_valores,riesgo
+from New_script_funciones import Parametros_para_MTTF_MTTR,crear_subplot,calculo_demanda,calulo_ttf_ttr,funcion_escalon,funcion_de_mantenimiento,AND_entre_valores,riesgo,error
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import expon
@@ -344,5 +344,6 @@ plt.legend()
 plt.show()
 
 #*****************************Calculo de riesgo con lo que tenenos sin implementar le modelo de optimizacion**********************************
-riesgo(pico_diario,resultado_suma)
-error_(riesgo(pico_diario,resultado_suma)):
+suma_de_riesgo = riesgo(pico_diario,resultado_suma)
+valor_esperado_de_riesgo=error(suma_de_riesgo)
+print('valor_esperado_de_riesgo=',valor_esperado_de_riesgo)
