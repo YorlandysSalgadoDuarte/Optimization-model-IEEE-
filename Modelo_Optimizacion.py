@@ -345,5 +345,6 @@ plt.show()
 
 #*****************************Calculo de riesgo con lo que tenenos sin implementar le modelo de optimizacion**********************************
 suma_de_riesgo = riesgo(pico_diario,resultado_suma)
-valor_esperado_de_riesgo=error(suma_de_riesgo)
+valor_esperado_de_riesgo=error(suma_de_riesgo,pico_diario)
 print('valor_esperado_de_riesgo=',valor_esperado_de_riesgo)
+
