@@ -167,38 +167,72 @@ tiempo_establ_por_IEEE_mantenimiento_2U_400=6
 
 #*Valores de mantenimiento discretizados**********************************
 plt.figure(figsize=(15, 15))
-crear_subplot(1, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,1,12),'12')
-crear_subplot(2, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),'12')
-crear_subplot(3, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,3,12),'12')
-crear_subplot(4, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,3,12),'12')
-crear_subplot(5, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,3,12),'12')
-crear_subplot(6, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,3,20),'20')
-crear_subplot(7, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,3,20),'20')
-crear_subplot(8, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,3,20),'20')
-crear_subplot(9, funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,3,20),'20')
-crear_subplot(10,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,5,50),'50')
-crear_subplot(11,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,5,50),'50')
-crear_subplot(12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,5,50),'50')
-crear_subplot(13,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,5,50),'50')
-crear_subplot(14,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,5,50),'50')
-crear_subplot(15,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,5,50),'50')
-crear_subplot(16,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,2,76),'76')
-crear_subplot(17,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,2,76),'76')
-crear_subplot(18,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,2,76),'76')
-crear_subplot(19,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,2,76),'76')
-crear_subplot(20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,2,100),'100')
-crear_subplot(21,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,2,100),'100')
-crear_subplot(22,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,2,100),'100')
-crear_subplot(23,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,2,155),'155')
-crear_subplot(24,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,2,155),'155')
-crear_subplot(25,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,2,155),'155')
-crear_subplot(26,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,2,155),'155')
-crear_subplot(27,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,3,197),'197')
-crear_subplot(28,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,3,197),'197')
-crear_subplot(29,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,3,197),'197')
-crear_subplot(30,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,1,350),'350')
-crear_subplot(31,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,1,400),'400')
-crear_subplot(32,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,1,400),'400')
+
+#***********************************VARIABLES DE MANTENIMIENTO********************************
+MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12)
+MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12)
+MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12)
+MANT_U12_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12)
+MANT_U12_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12)
+MANT_U20_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20)
+MANT_U20_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20)
+MANT_U20_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20)
+MANT_U20_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20)
+MANT_U50_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50)
+MANT_U50_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50)
+MANT_U50_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50)
+MANT_U50_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50)
+MANT_U50_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50)
+MANT_U50_6=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50)
+MANT_U76_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76)
+MANT_U76_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76)
+MANT_U76_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76)
+MANT_U76_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76)
+MANT_U100_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100)
+MANT_U100_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100)
+MANT_U100_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100)
+MANT_U155_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155)
+MANT_U155_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155)
+MANT_U155_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155)
+MANT_U155_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155)
+MANT_U197_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197)
+MANT_U197_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197)
+MANT_U197_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197)
+MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350)
+MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400)
+MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400)
+crear_subplot(1, MANT_U12_1,'12')
+crear_subplot(2, MANT_U12_2,'12')
+crear_subplot(3, MANT_U12_3,'12')
+crear_subplot(4, MANT_U12_4,'12')
+crear_subplot(5, MANT_U12_5,'12')
+crear_subplot(6, MANT_U20_1,'20')
+crear_subplot(7, MANT_U20_2,'20')
+crear_subplot(8, MANT_U20_3,'20')
+crear_subplot(9, MANT_U20_4,'20')
+crear_subplot(10,MANT_U50_1,'50')
+crear_subplot(11,MANT_U50_2,'50')
+crear_subplot(12,MANT_U50_3,'50')
+crear_subplot(13,MANT_U50_4,'50')
+crear_subplot(14,MANT_U50_5,'50')
+crear_subplot(15,MANT_U50_6,'50')
+crear_subplot(16,MANT_U76_1,'76')
+crear_subplot(17,MANT_U76_2,'76')
+crear_subplot(18,MANT_U76_3,'76')
+crear_subplot(19,MANT_U76_4,'76')
+crear_subplot(20,MANT_U100_1,'100')
+crear_subplot(21,MANT_U100_2,'100')
+crear_subplot(22,MANT_U100_3,'100')
+crear_subplot(23,MANT_U155_1,'155')
+crear_subplot(24,MANT_U155_2,'155')
+crear_subplot(25,MANT_U155_3,'155')
+crear_subplot(26,MANT_U155_4,'155')
+crear_subplot(27,MANT_U197_1,'197')
+crear_subplot(28,MANT_U197_2,'197')
+crear_subplot(29,MANT_U197_3,'197')
+crear_subplot(30,MANT_U350_1,'350')
+crear_subplot(31,MANT_U400_1,'400')
+crear_subplot(32,MANT_U400_2,'400')
 
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
@@ -207,103 +241,103 @@ plt.show()
 
 #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
 #**********************************UNIDAD 12 *************************
-AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12)
-crear_subplot(1, AND_entre_valores(valores_acotados_ventana_1U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,5,12),12),'12')
+AND_U12_1=AND_entre_valores(valores_acotados_ventana_2U12,MANT_U12_1,12)
+crear_subplot(1, AND_U12_1,'12')
 
-AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12)
-crear_subplot(2, AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12),'12')
+AND_U12_2=AND_entre_valores(valores_acotados_ventana_2U12,MANT_U12_2,12)
+crear_subplot(2, AND_U12_2,'12')
 
-AND_entre_valores(valores_acotados_ventana_3U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,3,12),12)
-crear_subplot(3, AND_entre_valores(valores_acotados_ventana_3U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,3,12),12),'12')
+AND_U12_3=AND_entre_valores(valores_acotados_ventana_3U12,MANT_U12_3,12)
+crear_subplot(3, AND_U12_3,'12')
 
-AND_entre_valores(valores_acotados_ventana_4U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,3,12),12)
-crear_subplot(4, AND_entre_valores(valores_acotados_ventana_4U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,3,12),12),'12')
+AND_U12_4=AND_entre_valores(valores_acotados_ventana_4U12,MANT_U12_4,12)
+crear_subplot(4,AND_U12_4,'12')
 
-AND_entre_valores(valores_acotados_ventana_5U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,3,12),12)
-crear_subplot(5, AND_entre_valores(valores_acotados_ventana_5U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,3,12),12),'12')
+AND_U12_5=AND_entre_valores(valores_acotados_ventana_5U12,MANT_U12_5,12)
+crear_subplot(5, AND_U12_5,'12')
 
 #**********************************UNIDAD 20 *************************
-AND_entre_valores(valores_acotados_ventana_1U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,3,20),20)
-crear_subplot(6, AND_entre_valores(valores_acotados_ventana_1U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,3,20),20),'20')
+AND_U20_1=AND_entre_valores(valores_acotados_ventana_1U20,MANT_U20_1,20)
+crear_subplot(6, AND_U20_1,'20')
 
-AND_entre_valores(valores_acotados_ventana_2U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,3,20),20)
-crear_subplot(7, AND_entre_valores(valores_acotados_ventana_2U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,3,20),20),'20')
+AND_U20_2=AND_entre_valores(valores_acotados_ventana_2U20,MANT_U20_2,20)
+crear_subplot(7, AND_U20_2,'20')
 
-AND_entre_valores(valores_acotados_ventana_3U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,3,20),20)
-crear_subplot(8, AND_entre_valores(valores_acotados_ventana_3U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,3,20),20),'20')
+AND_U20_3=AND_entre_valores(valores_acotados_ventana_3U20,MANT_U20_3,20)
+crear_subplot(8, AND_U20_3,'20')
 
-AND_entre_valores(valores_acotados_ventana_4U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,3,20),20)
-crear_subplot(9, AND_entre_valores(valores_acotados_ventana_4U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,3,20),20),'20')
+AND_U20_4=AND_entre_valores(valores_acotados_ventana_4U20,MANT_U20_4,20)
+crear_subplot(9, AND_U20_4,'20')
 #**********************************UNIDAD 50 *************************
-AND_entre_valores(valores_acotados_ventana_1U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,5,50),50)
-crear_subplot(10, AND_entre_valores(valores_acotados_ventana_1U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,5,50),50),'50')
+AND_U50_1=AND_entre_valores(valores_acotados_ventana_1U50,MANT_U50_1,50)
+crear_subplot(10, AND_U50_1,'50')
 
-AND_entre_valores(valores_acotados_ventana_2U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,5,50),50)
-crear_subplot(11, AND_entre_valores(valores_acotados_ventana_2U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,5,50),50),'50')
+AND_U50_2=AND_entre_valores(valores_acotados_ventana_2U50,MANT_U50_2,50)
+crear_subplot(11, AND_U50_2,'50')
 
-AND_entre_valores(valores_acotados_ventana_3U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,5,50),50)
-crear_subplot(12, AND_entre_valores(valores_acotados_ventana_3U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,5,50),50),'50')
+AND_U50_3=AND_entre_valores(valores_acotados_ventana_3U50,MANT_U50_3,50)
+crear_subplot(12, AND_U50_3,'50')
 
-AND_entre_valores(valores_acotados_ventana_4U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,5,50),50)
-crear_subplot(13, AND_entre_valores(valores_acotados_ventana_4U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,5,50),50),'50')
+AND_U50_4=AND_entre_valores(valores_acotados_ventana_4U50,MANT_U50_4,50)
+crear_subplot(13,AND_U50_4,'50')
 
-AND_entre_valores(valores_acotados_ventana_5U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,5,50),50)
-crear_subplot(14, AND_entre_valores(valores_acotados_ventana_5U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,5,50),50),'50')
+AND_U50_5=AND_entre_valores(valores_acotados_ventana_5U50,MANT_U50_5,50)
+crear_subplot(14, AND_U50_5,'50')
 
-AND_entre_valores(valores_acotados_ventana_6U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,5,50),50)
-crear_subplot(15, AND_entre_valores(valores_acotados_ventana_6U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,5,50),50),'50')
+AND_U50_6=AND_entre_valores(valores_acotados_ventana_6U50,MANT_U50_6,50)
+crear_subplot(15, AND_U50_6,'50')
 # Ajustar el diseño para evitar superposiciones
 #**********************************UNIDAD 76 *************************
-AND_entre_valores(valores_acotados_ventana_1U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,2,76),76)
-crear_subplot(16, AND_entre_valores(valores_acotados_ventana_1U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,2,76),76),'76')
+AND_U76_1=AND_entre_valores(valores_acotados_ventana_1U76,MANT_U76_1,76)
+crear_subplot(16, AND_U76_1,'76')
 
-AND_entre_valores(valores_acotados_ventana_2U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,2,76),76)
-crear_subplot(17, AND_entre_valores(valores_acotados_ventana_2U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,2,76),76),'76')
+AND_U76_2=AND_entre_valores(valores_acotados_ventana_2U76,MANT_U76_2,76)
+crear_subplot(17, AND_U76_2,'76')
 
-AND_entre_valores(valores_acotados_ventana_3U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,2,76),76)
-crear_subplot(18, AND_entre_valores(valores_acotados_ventana_3U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,2,76),76),'76')
+AND_U76_3=AND_entre_valores(valores_acotados_ventana_3U76,MANT_U76_3,76)
+crear_subplot(18,AND_U76_3,'76')
 
-AND_entre_valores(valores_acotados_ventana_4U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,2,76),76)
-crear_subplot(19, AND_entre_valores(valores_acotados_ventana_4U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,2,76),76),'76')
+AND_U76_4=AND_entre_valores(valores_acotados_ventana_4U76,MANT_U76_4,76)
+crear_subplot(19, AND_U76_4,'76')
 #**********************************UNIDAD 100 *************************
-AND_entre_valores(valores_acotados_ventana_1U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,2,100),100)
-crear_subplot(20, AND_entre_valores(valores_acotados_ventana_1U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,2,100),100),'100')
+AND_U100_1=AND_entre_valores(valores_acotados_ventana_1U100,MANT_U100_1,100)
+crear_subplot(20, AND_U100_1,'100')
 
-AND_entre_valores(valores_acotados_ventana_2U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,2,100),100)
-crear_subplot(21, AND_entre_valores(valores_acotados_ventana_2U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,2,100),100),'100')
+AND_U100_2=AND_entre_valores(valores_acotados_ventana_2U100,MANT_U100_2,100)
+crear_subplot(21, AND_U100_2,'100')
 
-AND_entre_valores(valores_acotados_ventana_3U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,2,100),100)
-crear_subplot(22, AND_entre_valores(valores_acotados_ventana_3U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,2,100),100),'100')
+AND_U100_3=AND_entre_valores(valores_acotados_ventana_3U100,MANT_U100_3,100)
+crear_subplot(22,AND_U100_3,'100')
 #**********************************UNIDAD 155 *************************
-AND_entre_valores(valores_acotados_ventana_1U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,2,155),155)
-crear_subplot(23, AND_entre_valores(valores_acotados_ventana_1U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,2,155),155),'155')
+AND_U155_1=AND_entre_valores(valores_acotados_ventana_1U155,MANT_U155_1,155)
+crear_subplot(23,AND_U155_1,'155')
 
-AND_entre_valores(valores_acotados_ventana_2U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,2,155),155)
-crear_subplot(24, AND_entre_valores(valores_acotados_ventana_2U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,2,155),155),'155')
+AND_U155_2=AND_entre_valores(valores_acotados_ventana_2U155,MANT_U155_2,155)
+crear_subplot(24, AND_U155_2,'155')
 
-AND_entre_valores(valores_acotados_ventana_3U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,2,155),155)
-crear_subplot(25, AND_entre_valores(valores_acotados_ventana_3U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,2,155),155),'155')
+AND_U155_3=AND_entre_valores(valores_acotados_ventana_3U155,MANT_U155_3,155)
+crear_subplot(25, AND_U155_3,'155')
 
-AND_entre_valores(valores_acotados_ventana_4U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,2,155),155)
-crear_subplot(26, AND_entre_valores(valores_acotados_ventana_4U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,2,155),155),'155')
+AND_U155_4=AND_entre_valores(valores_acotados_ventana_4U155,MANT_U155_4,155)
+crear_subplot(26,AND_U155_4,'155')
 #**********************************UNIDAD 197 *************************
-AND_entre_valores(valores_acotados_ventana_1U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,3,197),197)
-crear_subplot(27, AND_entre_valores(valores_acotados_ventana_1U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,3,197),197),'197')
+AND_U197_1=AND_entre_valores(valores_acotados_ventana_1U197,MANT_U197_1,197)
+crear_subplot(27, AND_U197_1,'197')
 
-AND_entre_valores(valores_acotados_ventana_2U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,3,197),197)
-crear_subplot(28, AND_entre_valores(valores_acotados_ventana_2U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,3,197),197),'197')
+AND_U197_2=AND_entre_valores(valores_acotados_ventana_2U197,MANT_U197_2,197)
+crear_subplot(28, AND_U197_2,'197')
 
-AND_entre_valores(valores_acotados_ventana_3U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,3,197),197)
-crear_subplot(29, AND_entre_valores(valores_acotados_ventana_3U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,3,197),197),'197')
+AND_U197_3=AND_entre_valores(valores_acotados_ventana_3U197,MANT_U197_3,197)
+crear_subplot(29,AND_U197_3,'197')
 #**********************************UNIDAD 350 *************************
-AND_entre_valores(valores_acotados_ventana_1U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,1,350),350)
-crear_subplot(30, AND_entre_valores(valores_acotados_ventana_1U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,1,350),350),'350')
+AND_U350_1=AND_entre_valores(valores_acotados_ventana_1U350,MANT_U350_1,350)
+crear_subplot(30, AND_U350_1,'350')
 #**********************************UNIDAD 400 *************************
-AND_entre_valores(valores_para_acotar_la_ventana_1U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,1,400),400)
-crear_subplot(31, AND_entre_valores(valores_para_acotar_la_ventana_1U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,1,400),400),'400')
+AND_U400_1=AND_entre_valores(valores_para_acotar_la_ventana_1U400,MANT_U400_1,400)
+crear_subplot(31, AND_U400_1,'400')
 
-AND_entre_valores(valores_para_acotar_la_ventana_2U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,1,400),400)
-crear_subplot(32, AND_entre_valores(valores_para_acotar_la_ventana_2U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,1,400),400),'400')
+AND_U400_2=AND_entre_valores(valores_para_acotar_la_ventana_2U400,MANT_U400_2,400)
+crear_subplot(32, AND_U400_2,'400')
 
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
@@ -311,15 +345,15 @@ plt.tight_layout()
 plt.show()
 
 #******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
-resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_entre_valores(valores_acotados_ventana_1U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,5,12),12),AND_entre_valores(valores_acotados_ventana_2U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,3,12),12),AND_entre_valores(valores_acotados_ventana_3U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,3,12),12),AND_entre_valores(valores_acotados_ventana_4U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,3,12),12),AND_entre_valores(valores_acotados_ventana_5U12,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,3,12),12),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,3,20),20),AND_entre_valores(valores_acotados_ventana_2U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,3,20),20),AND_entre_valores(valores_acotados_ventana_3U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,3,20),20),AND_entre_valores(valores_acotados_ventana_4U20,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,3,20),20),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_2U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_3U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_4U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_5U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,3,50),50),AND_entre_valores(valores_acotados_ventana_6U50,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,3,50),50),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,2,76),76),AND_entre_valores(valores_acotados_ventana_2U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,2,76),76),AND_entre_valores(valores_acotados_ventana_3U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,2,76),76),AND_entre_valores(valores_acotados_ventana_4U76,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,2,76),76),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,2,100),100),AND_entre_valores(valores_acotados_ventana_2U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,2,100),100),AND_entre_valores(valores_acotados_ventana_3U100,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,2,100),100),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,2,155),155),AND_entre_valores(valores_acotados_ventana_2U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,2,155),155),AND_entre_valores(valores_acotados_ventana_3U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,2,155),155),AND_entre_valores(valores_acotados_ventana_4U155,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,3,155),155),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,3,197),197),AND_entre_valores(valores_acotados_ventana_2U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,3,197),197),AND_entre_valores(valores_acotados_ventana_3U197,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,3,197),197),
-                                                                                                                                                                         AND_entre_valores(valores_acotados_ventana_1U350,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,1,350),350),
-                                                                                                                                                                         AND_entre_valores(valores_para_acotar_la_ventana_1U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,1,400),400),AND_entre_valores(valores_para_acotar_la_ventana_2U400,funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,1,400),400))]
+resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_U12_1,AND_U12_2,AND_U12_3,AND_U12_4,AND_U12_5,
+                                                                                                                                                                         AND_U20_1,AND_U20_2,AND_U20_3,AND_U20_4,
+                                                                                                                                                                         AND_U50_1,AND_U50_2,AND_U50_3,AND_U50_3,AND_U50_4,AND_U50_5,AND_U50_6,
+                                                                                                                                                                        AND_U76_1,AND_U76_2,AND_U76_3,AND_U76_4,
+                                                                                                                                                                        AND_U100_1,AND_U100_2,AND_U100_3,
+                                                                                                                                                                        AND_U155_1,AND_U155_2,AND_U155_3,AND_U155_4,
+                                                                                                                                                                        AND_U197_1,AND_U197_2,AND_U197_3,
+                                                                                                                                                                        AND_U350_1,
+                                                                                                                                                                        AND_U400_1,AND_U400_2)]
 print(resultado_suma)
 # Crear un gráfico de línea
 plt.plot(resultado_suma)
