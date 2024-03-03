@@ -347,7 +347,7 @@ plt.show()
 #******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
 resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_U12_1,AND_U12_2,AND_U12_3,AND_U12_4,AND_U12_5,
                                                                                                                                                                          AND_U20_1,AND_U20_2,AND_U20_3,AND_U20_4,
-                                                                                                                                                                         AND_U50_1,AND_U50_2,AND_U50_3,AND_U50_3,AND_U50_4,AND_U50_5,AND_U50_6,
+                                                                                                                                                                         AND_U50_1,AND_U50_2,AND_U50_3,AND_U50_4,AND_U50_5,AND_U50_6,
                                                                                                                                                                         AND_U76_1,AND_U76_2,AND_U76_3,AND_U76_4,
                                                                                                                                                                         AND_U100_1,AND_U100_2,AND_U100_3,
                                                                                                                                                                         AND_U155_1,AND_U155_2,AND_U155_3,AND_U155_4,
