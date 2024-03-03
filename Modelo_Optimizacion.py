@@ -241,7 +241,7 @@ plt.show()
 
 #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
 #**********************************UNIDAD 12 *************************
-AND_U12_1=AND_entre_valores(valores_acotados_ventana_2U12,MANT_U12_1,12)
+AND_U12_1=AND_entre_valores(valores_acotados_ventana_1U12,MANT_U12_1,12)
 crear_subplot(1, AND_U12_1,'12')
 
 AND_U12_2=AND_entre_valores(valores_acotados_ventana_2U12,MANT_U12_2,12)
