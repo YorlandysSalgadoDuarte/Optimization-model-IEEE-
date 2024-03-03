@@ -532,7 +532,7 @@ def crear_subplot(indice, datos, etiqueta):
     plt.xlabel('Tiempo',fontsize=5)
     plt.ylabel('Valor del escalón',fontsize=5)
 #******************************************Funcion_de_Mantenimiento*******************************************************************************
-def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, meses_entre_mantenimiento: int, valor_en_MW, inicio_mantenimiento_hora_year: int = 0):
+def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_mantenimiento: int, valor_en_MW, inicio_mantenimiento_hora_year: int = 0):
     try:
         lista = [valor_en_MW] * 8736
         horas_entre_mantenimiento = semanas_de_mant_por_dato * 24
@@ -542,20 +542,20 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, meses_entre_mantenim
         if semanas_de_mant_por_dato > semanas_en_ano:
             raise ValueError("La cantidad de semanas de mantenimiento no puede ser mayor que la cantidad total de semanas en el año.")
 # Asegurar que el espacio entre mantenimientos sea válido
-        if meses_entre_mantenimiento * 4 * 7 * 24 >= len(lista):
+        if semanas_entre_mantenimiento * 7 * 24 >= len(lista):
             raise ValueError("El espacio entre mantenimientos excede la longitud de la lista. Por favor, ingrese nuevos valores.")
         inicio_mantenimiento_indice = inicio_mantenimiento_hora_year % len(lista)
         for _ in range(semanas_de_mant_por_dato):
 # Establecer mantenimiento en las próximas semanas
-            for i in range(horas_entre_mantenimiento):
-                lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
-
+            if semanas_entre_mantenimiento!=0:
+                for i in range(horas_entre_mantenimiento):
+                 lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
 # Restablecer el valor_en_MW después de las semanas de mantenimiento
             lista[(contador + inicio_mantenimiento_indice + horas_entre_mantenimiento) % len(lista)] = valor_en_MW
 
             contador += horas_entre_mantenimiento + 1  # Moverse a la próxima posición después del mantenimiento
 # Actualizar el índice de inicio para la próxima semana de mantenimiento
-            inicio_mantenimiento_indice += meses_entre_mantenimiento * 4 * 7 * 24
+            inicio_mantenimiento_indice += semanas_entre_mantenimiento * 7 * 24
         return lista
     except ValueError as e:
         print(f"Error: {e}")
@@ -565,7 +565,7 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
     vector_resultante = []
 # Verifica que ambas listas tengan la misma longitud
     if len(valores1) != len(valores2):
-        raise ValueError("Las listas deben tener la misma longitud")
+       raise ValueError("Las listas deben tener la misma longitud")
     for v1, v2 in zip(valores1, valores2):
         resultado_and = v1 and v2
         if resultado_and:
@@ -642,22 +642,28 @@ def error(suma_de_riesgo:float,pico_diario):
     vector_riesgo=[]
     error=[]
     while  True:
-        vector_riesgo.append(suma_de_riesgo)
-        valor_esperado_riesgo = np.mean(vector_riesgo)
-        desviacion_estandar = np.std(vector_riesgo)
-        error=desviacion_estandar/(valor_esperado_riesgo*math.sqrt(len(vector_riesgo)))
+        if suma_de_riesgo==0:
+            vector_riesgo.append(0)
+            valor_esperado_riesgo = np.mean(vector_riesgo)
+            error=None
+            generacion=Simulacion()
+            riesgo(pico_diario,generacion)
+            continue
+        elif suma_de_riesgo!=0:
+            vector_riesgo.append(suma_de_riesgo)
+            valor_esperado_riesgo = np.mean(vector_riesgo)
+            desviacion_estandar = np.std(vector_riesgo)
+            error=desviacion_estandar/(valor_esperado_riesgo*math.sqrt(len(vector_riesgo)))
 #?Valor del error para el criterio de parada
-        if error<=0.01 and desviacion_estandar>0:
-            print("el valor_esperado_riesgo del valor de riesgo es:> ",valor_esperado_riesgo)
-            print('error>',error)
-            break
-        #print('error>',error)
-        #print(f'el valor esperado es de {valor_esperado_riesgo} MW')
-        generacion=Simulacion()
-        riesgo(pico_diario,generacion)
+            if error<=0.01 and desviacion_estandar>0:
+                print("el valor_esperado_riesgo del valor de riesgo es:> ",valor_esperado_riesgo)
+                print('error>',error)
+                break
+            # print('error>',error)
+            # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
+            generacion=Simulacion()
+            riesgo(pico_diario,generacion)
     return valor_esperado_riesgo,error
-
-
 
 #**************************************************************************************************Funcion de Simulacion completada*********************************
 def Simulacion():
@@ -760,38 +766,38 @@ def Simulacion():
     tiempo_establ_por_IEEE_mantenimiento_1U_400=6
     tiempo_establ_por_IEEE_mantenimiento_2U_400=6
 #*Valores de mantenimiento discretizados**********************************
-    MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12)
-    MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12)
-    MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12)
-    MANT_U12_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12)
-    MANT_U12_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12)
-    MANT_U20_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20)
-    MANT_U20_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20)
-    MANT_U20_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20)
-    MANT_U20_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20)
-    MANT_U50_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50)
-    MANT_U50_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50)
-    MANT_U50_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50)
-    MANT_U50_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50)
-    MANT_U50_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50)
-    MANT_U50_6=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50)
-    MANT_U76_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76)
-    MANT_U76_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76)
-    MANT_U76_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76)
-    MANT_U76_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76)
-    MANT_U100_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100)
-    MANT_U100_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100)
-    MANT_U100_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100)
-    MANT_U155_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155)
-    MANT_U155_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155)
-    MANT_U155_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155)
-    MANT_U155_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155)
-    MANT_U197_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197)
-    MANT_U197_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197)
-    MANT_U197_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197)
-    MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350)
-    MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400)
-    MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400)
+    MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,4434)
+    MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,2015)
+    MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,5512)
+    MANT_U12_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,970)
+    MANT_U12_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5959)
+    MANT_U20_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3006)
+    MANT_U20_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,7)
+    MANT_U20_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,5002)
+    MANT_U20_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,1872)
+    MANT_U50_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,7248)
+    MANT_U50_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,5540)
+    MANT_U50_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5043)
+    MANT_U50_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,4331)
+    MANT_U50_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,1809)
+    MANT_U50_6=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,6514)
+    MANT_U76_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,1305)
+    MANT_U76_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1828)
+    MANT_U76_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5041)
+    MANT_U76_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,5523)
+    MANT_U100_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,6719)
+    MANT_U100_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,6376)
+    MANT_U100_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,327)
+    MANT_U155_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,3317)
+    MANT_U155_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,7885)
+    MANT_U155_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,7257)
+    MANT_U155_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,2527)
+    MANT_U197_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,1849)
+    MANT_U197_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,4222)
+    MANT_U197_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,4318)
+    MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,5072)
+    MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,405)
+    MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,4190)
         
     #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
     #**********************************UNIDAD 12 *************************
