@@ -540,6 +540,8 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
     try:
         lista = [valor_en_MW] * 8736
         horas_entre_mantenimiento = semanas_entre_mantenimiento*7* 24
+        mant_una_semana=24*7
+        horas_de_mant_por_datos=semanas_de_mant_por_dato*7*24
         contador = 0
 # Asegurar que semanas_de_mant_por_dato no sea mayor que la cantidad total de semanas en el año
         semanas_en_ano = 52
@@ -548,20 +550,31 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
 # Asegurar que el espacio entre mantenimientos sea válido
         if horas_entre_mantenimiento >= 8736:
             raise ValueError("El espacio entre mantenimientos excede la longitud de la lista. Por favor, ingrese nuevos valores.")
-#*
-        inicio_mantenimiento_indice = inicio_mantenimiento_hora_year % len(lista)
-        for _ in range(semanas_de_mant_por_dato):
-# Establecer mantenimiento en las próximas semanas
-            if semanas_entre_mantenimiento!=0:
-                for i in range(horas_entre_mantenimiento):
-                 lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
-# Restablecer el valor_en_MW después de las semanas de mantenimiento
-            lista[(contador + inicio_mantenimiento_indice + horas_entre_mantenimiento) % len(lista)] = valor_en_MW
+#****************************************************************************Posibles errrores que terminarian con el codigo **********************
+        elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year==0 and semanas_entre_mantenimiento==0 :
+            lista[0:horas_de_mant_por_datos]=[0]*horas_de_mant_por_datos
+            return lista
+        elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento==0:
+            lista[inicio_mantenimiento_hora_year:horas_de_mant_por_datos+inicio_mantenimiento_hora_year]=[0]*horas_de_mant_por_datos
+            return lista
+        elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento!=0:
+            for i in range(semanas_entre_mantenimiento):
+                lista[inicio_mantenimiento_hora_year:]
+                
 
-            contador += horas_entre_mantenimiento + 1  # Moverse a la próxima posición después del mantenimiento
-# Actualizar el índice de inicio para la próxima semana de mantenimiento
-            inicio_mantenimiento_indice += semanas_entre_mantenimiento * 7 * 24
-        return lista
+#         inicio_mantenimiento_indice = inicio_mantenimiento_hora_year % len(lista)
+#         for _ in range(semanas_de_mant_por_dato):
+# # Establecer mantenimiento en las próximas semanas
+#             if semanas_entre_mantenimiento!=0:
+#                 for i in range(horas_entre_mantenimiento):
+#                  lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
+# # Restablecer el valor_en_MW después de las semanas de mantenimiento
+#             lista[(contador + inicio_mantenimiento_indice + horas_entre_mantenimiento) % len(lista)] = valor_en_MW
+
+#             contador += horas_entre_mantenimiento + 1  # Moverse a la próxima posición después del mantenimiento
+# # Actualizar el índice de inicio para la próxima semana de mantenimiento
+#             inicio_mantenimiento_indice += semanas_entre_mantenimiento * 7 * 24
+#         return lista
     except ValueError as e:
         print(f"Error: {e}")
         raise  # Re-levanta la excepción para que el usuario pueda ingresar nuevos valores
@@ -676,11 +689,8 @@ def Simulacion():
     MTTF='MTTF(horas)'
     MTTR='MTTR(horas)'
     Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
-
     Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
-
-
-    #TODO degradation_de las Unidades_sin_mantenimiento
+#TODO degradation_de las Unidades_sin_mantenimiento
     lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
     print('\n#***************************Valores Degradacion calculados **************************\n')
     C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
@@ -715,16 +725,8 @@ def Simulacion():
     C_DEG_U350_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,7,100,350)[:8736]
     C_DEG_U400_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
     C_DEG_U400_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
-    # *************************Ventana de valores hasta las 8736 horas****************************************
-
-    # *************************Función para crear un subplot dado un índice****************************************
-    # Obtener datos para cada unidad
-    # Crear subgráficos para cada unidad
-
-    # Ajustar el diseño para evitar superposiciones
-
-    # #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
-    # ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
+# #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
+# ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
     tiempo_establ_por_IEEE_mantenimiento_1U_12 =2
     tiempo_establ_por_IEEE_mantenimiento_2U_12 =2
     tiempo_establ_por_IEEE_mantenimiento_3U_12 =2
@@ -757,10 +759,7 @@ def Simulacion():
     tiempo_establ_por_IEEE_mantenimiento_1U_350=5
     tiempo_establ_por_IEEE_mantenimiento_1U_400=6
     tiempo_establ_por_IEEE_mantenimiento_2U_400=6
-
-    #*Valores de mantenimiento discretizados**********************************
-
-    #***********************************VARIABLES DE MANTENIMIENTO********************************
+#***********************************VARIABLES DE MANTENIMIENTO********************************
     MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,4434)
     MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,2015)
     MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,5512)
@@ -793,109 +792,52 @@ def Simulacion():
     MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,5072)
     MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,405)
     MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,4190)
-
-
-    #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
-    #**********************************UNIDAD 12 *************************
+#*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
+ #**********************************UNIDAD 12 *************************
     AND_U12_1=AND_entre_valores(C_DEG_U12_1,MANT_U12_1,12)
-
-
     AND_U12_2=AND_entre_valores(C_DEG_U12_2,MANT_U12_2,12)
-
-
     AND_U12_3=AND_entre_valores(C_DEG_U12_3,MANT_U12_3,12)
-
-
     AND_U12_4=AND_entre_valores(C_DEG_U12_4,MANT_U12_4,12)
-
-
     AND_U12_5=AND_entre_valores(C_DEG_U12_5,MANT_U12_5,12)
-
-
-    #**********************************UNIDAD 20 *************************
+#**********************************UNIDAD 20 *************************
     AND_U20_1=AND_entre_valores(C_DEG_U20_1,MANT_U20_1,20)
-
-
     AND_U20_2=AND_entre_valores(C_DEG_U20_2,MANT_U20_2,20)
-
-
     AND_U20_3=AND_entre_valores(C_DEG_U20_3,MANT_U20_3,20)
-
-
     AND_U20_4=AND_entre_valores(C_DEG_U20_4,MANT_U20_4,20)
-
-    #**********************************UNIDAD 50 *************************
+#**********************************UNIDAD 50 *************************
     AND_U50_1=AND_entre_valores(C_DEG_U50_1,MANT_U50_1,50)
-
-
     AND_U50_2=AND_entre_valores(C_DEG_U50_2,MANT_U50_2,50)
-
-
     AND_U50_3=AND_entre_valores(C_DEG_U50_3,MANT_U50_3,50)
-
-
     AND_U50_4=AND_entre_valores(C_DEG_U50_4,MANT_U50_4,50)
-
-
     AND_U50_5=AND_entre_valores(C_DEG_U50_5,MANT_U50_5,50)
-
-
     AND_U50_6=AND_entre_valores(C_DEG_U50_6,MANT_U50_6,50)
-
-    # Ajustar el diseño para evitar superposiciones
-    #**********************************UNIDAD 76 *************************
+#**********************************UNIDAD 76 *************************
     AND_U76_1=AND_entre_valores(C_DEG_U76_1,MANT_U76_1,76)
-
-
     AND_U76_2=AND_entre_valores(C_DEG_U76_2,MANT_U76_2,76)
-
-
     AND_U76_3=AND_entre_valores(C_DEG_U76_3,MANT_U76_3,76)
-
-
     AND_U76_4=AND_entre_valores(C_DEG_U76_4,MANT_U76_4,76)
-
-    #**********************************UNIDAD 100 *************************
+#**********************************UNIDAD 100 *************************
     AND_U100_1=AND_entre_valores(C_DEG_U100_1,MANT_U100_1,100)
-
-
     AND_U100_2=AND_entre_valores(C_DEG_U100_2,MANT_U100_2,100)
-
-
     AND_U100_3=AND_entre_valores(C_DEG_U100_3,MANT_U100_3,100)
-
-    #**********************************UNIDAD 155 *************************
+#**********************************UNIDAD 155 *************************
     AND_U155_1=AND_entre_valores(C_DEG_U155_1,MANT_U155_1,155)
-
-
     AND_U155_2=AND_entre_valores(C_DEG_U155_2,MANT_U155_2,155)
-
-
     AND_U155_3=AND_entre_valores(C_DEG_U155_3,MANT_U155_3,155)
-
-
     AND_U155_4=AND_entre_valores(C_DEG_U155_4,MANT_U155_4,155)
-
-    #**********************************UNIDAD 197 *************************
+#**********************************UNIDAD 197 *************************
     AND_U197_1=AND_entre_valores(C_DEG_U197_1,MANT_U197_1,197)
-
-
     AND_U197_2=AND_entre_valores(C_DEG_U197_2,MANT_U197_2,197)
-
-
     AND_U197_3=AND_entre_valores(C_DEG_U197_3,MANT_U197_3,197)
-  
-    #**********************************UNIDAD 350 *************************
+#**********************************UNIDAD 350 *************************
     AND_U350_1=AND_entre_valores(C_DEG_U350_1,MANT_U350_1,350)
- 
-    #**********************************UNIDAD 400 *************************
+#**********************************UNIDAD 400 *************************
     AND_U400_1=AND_entre_valores(C_DEG_U400_1,MANT_U400_1,400)
-
     AND_U400_2=AND_entre_valores(C_DEG_U400_2,MANT_U400_2,400)
 
 
   
-    #******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
+#******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
     resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_U12_1,AND_U12_2,AND_U12_3,AND_U12_4,AND_U12_5,
                                                                                                                                                                             AND_U20_1,AND_U20_2,AND_U20_3,AND_U20_4,
                                                                                                                                                                             AND_U50_1,AND_U50_2,AND_U50_3,AND_U50_4,AND_U50_5,AND_U50_6,
