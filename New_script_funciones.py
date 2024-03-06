@@ -560,8 +560,8 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
         elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento!=0:
             for i in range(semanas_entre_mantenimiento):
                 lista[inicio_mantenimiento_hora_year:mant_una_semana+inicio_mantenimiento_hora_year]=[0]*mant_una_semana
-                inicio_mantenimiento_hora_year+=inicio_mantenimiento_hora_year
-                mant_una_semana+=mant_una_semana
+                inicio_mantenimiento_hora_year=inicio_mantenimiento_hora_year+inicio_mantenimiento_hora_year
+                print('inicio_mantenimiento_hora_year=',inicio_mantenimiento_hora_year)
                 return lista
     except ValueError as e:
         print(f"Error: {e}")

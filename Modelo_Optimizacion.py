@@ -364,4 +364,3 @@ plt.show()
 suma_de_riesgo = riesgo(pico_horario,resultado_suma)
 valor_esperado_de_riesgo=error(suma_de_riesgo,pico_horario)
 print('valor_esperado_de_riesgo=',valor_esperado_de_riesgo)
-
