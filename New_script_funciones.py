@@ -559,22 +559,10 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
             return lista
         elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento!=0:
             for i in range(semanas_entre_mantenimiento):
-                lista[inicio_mantenimiento_hora_year:]
-                
-
-#         inicio_mantenimiento_indice = inicio_mantenimiento_hora_year % len(lista)
-#         for _ in range(semanas_de_mant_por_dato):
-# # Establecer mantenimiento en las próximas semanas
-#             if semanas_entre_mantenimiento!=0:
-#                 for i in range(horas_entre_mantenimiento):
-#                  lista[(contador + inicio_mantenimiento_indice + i) % len(lista)] = 0
-# # Restablecer el valor_en_MW después de las semanas de mantenimiento
-#             lista[(contador + inicio_mantenimiento_indice + horas_entre_mantenimiento) % len(lista)] = valor_en_MW
-
-#             contador += horas_entre_mantenimiento + 1  # Moverse a la próxima posición después del mantenimiento
-# # Actualizar el índice de inicio para la próxima semana de mantenimiento
-#             inicio_mantenimiento_indice += semanas_entre_mantenimiento * 7 * 24
-#         return lista
+                lista[inicio_mantenimiento_hora_year:mant_una_semana+inicio_mantenimiento_hora_year]=[0]*mant_una_semana
+                inicio_mantenimiento_hora_year+=inicio_mantenimiento_hora_year
+                mant_una_semana+=mant_una_semana
+                return lista
     except ValueError as e:
         print(f"Error: {e}")
         raise  # Re-levanta la excepción para que el usuario pueda ingresar nuevos valores
