@@ -1,5 +1,5 @@
  #************************************* Librerias***********************************************************************************************************************************************************************
-from New_script_funciones import Parametros_para_MTTF_MTTR,crear_subplot,calculo_demanda,calulo_ttf_ttr,funcion_de_mantenimiento,AND_entre_valores,riesgo,error
+from New_script_funciones import Parametros_para_MTTF_MTTR,crear_subplot,calculo_demanda,calulo_ttf_ttr,funcion_de_mantenimiento,AND_entre_valores,riesgo,error,Simulacion
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import expon
@@ -24,18 +24,14 @@ pico_horario=calculo_demanda(pico_maximo,pico_maximo_por_semana_en_porciento,pic
 # plt.plot(pico_horario)
 # # Mostrar el gráfico
 # plt.show()
-
 #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
 MTTF='MTTF(horas)'
 MTTR='MTTR(horas)'
 Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
-
 Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
-
-
 #TODO degradation_de las Unidades_sin_mantenimiento
 lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
-print('\n#***************************Valores Degradacion calculados **************************\n')
+#***************************Valores Degradacion calculados **************************
 C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
 C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
 C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
@@ -68,10 +64,7 @@ C_DEG_U197_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_
 C_DEG_U350_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,7,100,350)[:8736]
 C_DEG_U400_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
 C_DEG_U400_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
-
-print("C_DEG_U20_1",C_DEG_U12_1,len(C_DEG_U20_1))
-# *************************Ventana de valores hasta las 8736 horas****************************************
-
+# print("C_DEG_U20_1",C_DEG_U12_1,len(C_DEG_U20_1))
 # *************************Función para crear un subplot dado un índice****************************************
 # Obtener datos para cada unidad
 # Crear subgráficos para cada unidad
@@ -108,13 +101,12 @@ crear_subplot(29,C_DEG_U197_3,'197')
 crear_subplot(30,C_DEG_U350_1,'350')
 crear_subplot(31,C_DEG_U400_1,'400')
 crear_subplot(32,C_DEG_U400_2,'400')
-
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
 # #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
-# ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
+# #********************************Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
 tiempo_establ_por_IEEE_mantenimiento_1U_12 =2
 tiempo_establ_por_IEEE_mantenimiento_2U_12 =2
 tiempo_establ_por_IEEE_mantenimiento_3U_12 =2
@@ -147,10 +139,8 @@ tiempo_establ_por_IEEE_mantenimiento_3U_197=4
 tiempo_establ_por_IEEE_mantenimiento_1U_350=5
 tiempo_establ_por_IEEE_mantenimiento_1U_400=6
 tiempo_establ_por_IEEE_mantenimiento_2U_400=6
-
 #*Valores de mantenimiento discretizados**********************************
 plt.figure(figsize=(15, 15))
-
 #***********************************VARIABLES DE MANTENIMIENTO********************************
 MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,4434)
 MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,2015)
@@ -216,100 +206,75 @@ crear_subplot(29,MANT_U197_3,'197')
 crear_subplot(30,MANT_U350_1,'350')
 crear_subplot(31,MANT_U400_1,'400')
 crear_subplot(32,MANT_U400_2,'400')
-
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
-
 #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
 #**********************************UNIDAD 12 *************************
 AND_U12_1=AND_entre_valores(C_DEG_U12_1,MANT_U12_1,12)
 crear_subplot(1, AND_U12_1,'12')
-
 AND_U12_2=AND_entre_valores(C_DEG_U12_2,MANT_U12_2,12)
 crear_subplot(2, AND_U12_2,'12')
-
 AND_U12_3=AND_entre_valores(C_DEG_U12_3,MANT_U12_3,12)
 crear_subplot(3, AND_U12_3,'12')
-
 AND_U12_4=AND_entre_valores(C_DEG_U12_4,MANT_U12_4,12)
 crear_subplot(4,AND_U12_4,'12')
-
 AND_U12_5=AND_entre_valores(C_DEG_U12_5,MANT_U12_5,12)
 crear_subplot(5, AND_U12_5,'12')
-
 #**********************************UNIDAD 20 *************************
 AND_U20_1=AND_entre_valores(C_DEG_U20_1,MANT_U20_1,20)
 crear_subplot(6, AND_U20_1,'20')
-
 AND_U20_2=AND_entre_valores(C_DEG_U20_2,MANT_U20_2,20)
 crear_subplot(7, AND_U20_2,'20')
-
 AND_U20_3=AND_entre_valores(C_DEG_U20_3,MANT_U20_3,20)
 crear_subplot(8, AND_U20_3,'20')
-
 AND_U20_4=AND_entre_valores(C_DEG_U20_4,MANT_U20_4,20)
 crear_subplot(9, AND_U20_4,'20')
 #**********************************UNIDAD 50 *************************
 AND_U50_1=AND_entre_valores(C_DEG_U50_1,MANT_U50_1,50)
 crear_subplot(10, AND_U50_1,'50')
-
 AND_U50_2=AND_entre_valores(C_DEG_U50_2,MANT_U50_2,50)
 crear_subplot(11, AND_U50_2,'50')
-
 AND_U50_3=AND_entre_valores(C_DEG_U50_3,MANT_U50_3,50)
 crear_subplot(12, AND_U50_3,'50')
-
 AND_U50_4=AND_entre_valores(C_DEG_U50_4,MANT_U50_4,50)
 crear_subplot(13,AND_U50_4,'50')
-
 AND_U50_5=AND_entre_valores(C_DEG_U50_5,MANT_U50_5,50)
 crear_subplot(14, AND_U50_5,'50')
-
 AND_U50_6=AND_entre_valores(C_DEG_U50_6,MANT_U50_6,50)
 crear_subplot(15, AND_U50_6,'50')
 # Ajustar el diseño para evitar superposiciones
 #**********************************UNIDAD 76 *************************
 AND_U76_1=AND_entre_valores(C_DEG_U76_1,MANT_U76_1,76)
 crear_subplot(16, AND_U76_1,'76')
-
 AND_U76_2=AND_entre_valores(C_DEG_U76_2,MANT_U76_2,76)
 crear_subplot(17, AND_U76_2,'76')
-
 AND_U76_3=AND_entre_valores(C_DEG_U76_3,MANT_U76_3,76)
 crear_subplot(18,AND_U76_3,'76')
-
 AND_U76_4=AND_entre_valores(C_DEG_U76_4,MANT_U76_4,76)
 crear_subplot(19, AND_U76_4,'76')
 #**********************************UNIDAD 100 *************************
 AND_U100_1=AND_entre_valores(C_DEG_U100_1,MANT_U100_1,100)
 crear_subplot(20, AND_U100_1,'100')
-
 AND_U100_2=AND_entre_valores(C_DEG_U100_2,MANT_U100_2,100)
 crear_subplot(21, AND_U100_2,'100')
-
 AND_U100_3=AND_entre_valores(C_DEG_U100_3,MANT_U100_3,100)
 crear_subplot(22,AND_U100_3,'100')
 #**********************************UNIDAD 155 *************************
 AND_U155_1=AND_entre_valores(C_DEG_U155_1,MANT_U155_1,155)
 crear_subplot(23,AND_U155_1,'155')
-
 AND_U155_2=AND_entre_valores(C_DEG_U155_2,MANT_U155_2,155)
 crear_subplot(24, AND_U155_2,'155')
-
 AND_U155_3=AND_entre_valores(C_DEG_U155_3,MANT_U155_3,155)
 crear_subplot(25, AND_U155_3,'155')
-
 AND_U155_4=AND_entre_valores(C_DEG_U155_4,MANT_U155_4,155)
 crear_subplot(26,AND_U155_4,'155')
 #**********************************UNIDAD 197 *************************
 AND_U197_1=AND_entre_valores(C_DEG_U197_1,MANT_U197_1,197)
 crear_subplot(27, AND_U197_1,'197')
-
 AND_U197_2=AND_entre_valores(C_DEG_U197_2,MANT_U197_2,197)
 crear_subplot(28, AND_U197_2,'197')
-
 AND_U197_3=AND_entre_valores(C_DEG_U197_3,MANT_U197_3,197)
 crear_subplot(29,AND_U197_3,'197')
 #**********************************UNIDAD 350 *************************
@@ -318,15 +283,12 @@ crear_subplot(30, AND_U350_1,'350')
 #**********************************UNIDAD 400 *************************
 AND_U400_1=AND_entre_valores(C_DEG_U400_1,MANT_U400_1,400)
 crear_subplot(31, AND_U400_1,'400')
-
 AND_U400_2=AND_entre_valores(C_DEG_U400_2,MANT_U400_2,400)
 crear_subplot(32, AND_U400_2,'400')
-
 # Ajustar el diseño para evitar superposiciones
 plt.tight_layout()
 # Mostrar todas las gráficas en una sola ventana
 plt.show()
-
 #******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
 resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_U12_1,AND_U12_2,AND_U12_3,AND_U12_4,AND_U12_5,
                                                                                                                                                                          AND_U20_1,AND_U20_2,AND_U20_3,AND_U20_4,
@@ -342,24 +304,18 @@ print(resultado_suma)
 plt.plot(resultado_suma)
 # Mostrar el gráfico
 plt.show()
-
 # Graficar la primera lista
 plt.plot(pico_horario, label='Pico Diario')
-
 # Graficar la segunda lista en el mismo gráfico
 plt.plot(resultado_suma, label='Resultado Suma')
-
 # Añadir etiquetas y título
 plt.xlabel('Eje X')
 plt.ylabel('Eje Y')
 plt.title('Dos Gráficas en el Mismo Gráfico')
-
 # Mostrar leyenda
 plt.legend()
-
 # Mostrar el gráfico
 plt.show()
-
 #*****************************Calculo de riesgo con lo que tenenos sin implementar le modelo de optimizacion**********************************
 suma_de_riesgo = riesgo(pico_horario,resultado_suma)
 valor_esperado_de_riesgo=error(suma_de_riesgo,pico_horario)

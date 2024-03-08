@@ -511,7 +511,7 @@ def calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR, 
             return resultado
         elif sum(tiempos_de_falla_o_repracion)<= tiempo_total:
             continue
-            #***************************************************Funcion_Escalon*******************************************************************************
+#***************************************************Funcion_Escalon*******************************************************************************
 # def funcion_escalon(ttf, ttr, valor_max_MW: int):
 #     tiempo_total = 8736
 #     resultado = []
@@ -561,7 +561,7 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
             for i in range(semanas_entre_mantenimiento):
                 lista[inicio_mantenimiento_hora_year:mant_una_semana+inicio_mantenimiento_hora_year]=[0]*mant_una_semana
                 inicio_mantenimiento_hora_year=inicio_mantenimiento_hora_year+inicio_mantenimiento_hora_year
-                print('inicio_mantenimiento_hora_year=',inicio_mantenimiento_hora_year)
+                # print('inicio_mantenimiento_hora_year=',inicio_mantenimiento_hora_year)
                 return lista
     except ValueError as e:
         print(f"Error: {e}")
@@ -578,9 +578,8 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
             vector_resultante.append(unidad_en_MW)
         else:
             vector_resultante.append(0)
-    print("Resultado de la operación AND con valores específicos:", vector_resultante)
+    # print("Resultado de la operación AND con valores específicos:", vector_resultante)
     return vector_resultante
-
 #******************************Algoritmo Genetico para minimizar la solucion del problema *******************************************************
 # def main(problema, prng=None, display=False):    
 #     if prng is None:
@@ -640,7 +639,7 @@ def riesgo(demanda:list,generacion:list):
             solv=i-j
             riesgo.append(solv)
     suma_de_riesgo=sum(riesgo)
-    print('suma_de_riesgo=',suma_de_riesgo)
+    # print('suma_de_riesgo=',suma_de_riesgo)
     return suma_de_riesgo
 
 def error(suma_de_riesgo:float,pico_):
@@ -652,8 +651,8 @@ def error(suma_de_riesgo:float,pico_):
             vector_riesgo.append(0)
             valor_esperado_riesgo = np.mean(vector_riesgo)
             error=None
-            generacion=Simulacion()
-            riesgo(pico_,generacion)
+            generacion=Simulacion(pico_horario=pico_)
+            suma_de_riesgo=riesgo(pico_,generacion)
             continue
         elif suma_de_riesgo!=0:
             vector_riesgo.append(suma_de_riesgo)
@@ -667,12 +666,12 @@ def error(suma_de_riesgo:float,pico_):
                 break
             # print('error>',error)
             # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
-            generacion=Simulacion()
-            riesgo(pico_,generacion)
+            generacion=Simulacion(pico_horario=pico_)
+            suma_de_riesgo=riesgo(pico_,generacion)
     return valor_esperado_riesgo,error
 
 #**************************************************************************************************Funcion de Simulacion completada*********************************
-def Simulacion():
+def Simulacion(pico_horario):
     #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
     MTTF='MTTF(horas)'
     MTTR='MTTR(horas)'
@@ -680,7 +679,7 @@ def Simulacion():
     Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 #TODO degradation_de las Unidades_sin_mantenimiento
     lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
-    print('\n#***************************Valores Degradacion calculados **************************\n')
+#***************************Valores Degradacion calculados **************************\n')
     C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
     C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
     C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
@@ -822,7 +821,6 @@ def Simulacion():
 #**********************************UNIDAD 400 *************************
     AND_U400_1=AND_entre_valores(C_DEG_U400_1,MANT_U400_1,400)
     AND_U400_2=AND_entre_valores(C_DEG_U400_2,MANT_U400_2,400)
-
 #******************************VALORES_DE_LA_DEMANDA_DISCRETIZADO***********************
     resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+gh+ij+kl for a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ab,cd,ef,gh,ij,kl in zip(AND_U12_1,AND_U12_2,AND_U12_3,AND_U12_4,AND_U12_5,
                                                                                                                                                                             AND_U20_1,AND_U20_2,AND_U20_3,AND_U20_4,
@@ -833,4 +831,27 @@ def Simulacion():
                                                                                                                                                                             AND_U197_1,AND_U197_2,AND_U197_3,
                                                                                                                                                                             AND_U350_1,
                                                                                                                                                                             AND_U400_1,AND_U400_2)]
+    # print(resultado_suma)
+    # # Crear un gráfico de línea
+    # plt.plot(resultado_suma)
+    # # Mostrar el gráfico
+    # plt.show()
+
+    # # Graficar la primera lista
+    
+    # plt.plot(pico_horario, label='Pico Diario')
+
+    # # Graficar la segunda lista en el mismo gráfico
+    # plt.plot(resultado_suma, label='Resultado Suma')
+
+    # # Añadir etiquetas y título
+    # plt.xlabel('Eje X')
+    # plt.ylabel('Eje Y')
+    # plt.title('Dos Gráficas en el Mismo Gráfico')
+
+    # # Mostrar leyenda
+    # plt.legend()
+
+    # # Mostrar el gráfico
+    # plt.show()
     return resultado_suma
