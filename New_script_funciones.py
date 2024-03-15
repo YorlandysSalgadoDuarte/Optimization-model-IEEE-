@@ -8,8 +8,6 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 from random import Random
-from time import time
-import inspyred
 import math
 #***********************************************************Calculo_de_la_demanda******************************************************************
 def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,
@@ -24,13 +22,10 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,
     for i in pico_maximo_por_semana_en_porciento:
         resultado=(pico_maximo*(i/100))
         pico_maximo_por_semana.append(resultado)
-
     for i in pico_maximo_por_semana :
         for j in pico_maximo_por_dias_en_porciento:
             resultado1= i *(j/100)
             pico_maximo_por_dias.append(resultado1)
-
-
 #TODo Primer grupo de valores para el calculo de la demanda--------------------------------------
 #semana_1_8_picos=pico_maximo_por_dias[:56]
     for i in pico_maximo_por_dias[0:5]:
@@ -635,8 +630,9 @@ def riesgo(demanda:list,generacion:list):
         if j>=i:
             solv=0
             riesgo.append(solv)
-        if i>=j:
+        if i>j:
             solv=i-j
+            
             riesgo.append(solv)
     suma_de_riesgo=sum(riesgo)
     # print('suma_de_riesgo=',suma_de_riesgo)
@@ -665,7 +661,7 @@ def error(suma_de_riesgo:float,pico_):
                 print('error>',error)
                 break
             # print('error>',error)
-            # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
+            print(f'el valor esperado es de {valor_esperado_riesgo} MW')
             generacion=Simulacion(pico_horario=pico_)
             suma_de_riesgo=riesgo(pico_,generacion)
     return valor_esperado_riesgo,error
@@ -680,38 +676,38 @@ def Simulacion(pico_horario):
 #TODO degradation_de las Unidades_sin_mantenimiento
     lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 #***************************Valores Degradacion calculados **************************\n')
-    C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
-    C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
-    C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
-    C_DEG_U12_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
-    C_DEG_U12_5=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,100,12)[:8736]
-    C_DEG_U20_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,100,20)[:8736]
-    C_DEG_U20_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,100,20)[:8736]
-    C_DEG_U20_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,100,20)[:8736]
-    C_DEG_U20_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,100,20)[:8736]
-    C_DEG_U50_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U50_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U50_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U50_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U50_5=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U50_6=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,100,50)[:8736]
-    C_DEG_U76_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,100,76)[:8736]
-    C_DEG_U76_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,100,76)[:8736]
-    C_DEG_U76_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,100,76)[:8736]
-    C_DEG_U76_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,100,76)[:8736]
-    C_DEG_U100_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,100,100)[:8736]
-    C_DEG_U100_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,100,100)[:8736]
-    C_DEG_U100_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,100,100)[:8736]
-    C_DEG_U155_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,100,155)[:8736]
-    C_DEG_U155_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,100,155)[:8736]
-    C_DEG_U155_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,100,155)[:8736]
-    C_DEG_U155_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,100,155)[:8736]
-    C_DEG_U197_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,100,197)[:8736]
-    C_DEG_U197_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,100,197)[:8736]
-    C_DEG_U197_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,100,197)[:8736]
-    C_DEG_U350_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,7,100,350)[:8736]
-    C_DEG_U400_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
-    C_DEG_U400_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,100,400)[:8736]
+    C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
+    C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
+    C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
+    C_DEG_U12_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
+    C_DEG_U12_5=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
+    C_DEG_U20_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,50,20)[:8736]
+    C_DEG_U20_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,50,20)[:8736]
+    C_DEG_U20_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,50,20)[:8736]
+    C_DEG_U20_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,1,50,20)[:8736]
+    C_DEG_U50_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U50_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U50_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U50_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U50_5=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U50_6=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,2,50,50)[:8736]
+    C_DEG_U76_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,50,76)[:8736]
+    C_DEG_U76_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,50,76)[:8736]
+    C_DEG_U76_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,50,76)[:8736]
+    C_DEG_U76_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,3,50,76)[:8736]
+    C_DEG_U100_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,50,100)[:8736]
+    C_DEG_U100_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,50,100)[:8736]
+    C_DEG_U100_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,4,50,100)[:8736]
+    C_DEG_U155_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,50,155)[:8736]
+    C_DEG_U155_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,50,155)[:8736]
+    C_DEG_U155_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,50,155)[:8736]
+    C_DEG_U155_4=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,5,50,155)[:8736]
+    C_DEG_U197_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,50,197)[:8736]
+    C_DEG_U197_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,50,197)[:8736]
+    C_DEG_U197_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,6,50,197)[:8736]
+    C_DEG_U350_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,7,50,350)[:8736]
+    C_DEG_U400_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,50,400)[:8736]
+    C_DEG_U400_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,8,50,400)[:8736]
 # #!Tiempos de Mantenimiento-para cada maquina ---corrido---------------------------------------------------=
 # ##*#########################################Semanas de Mant*dias_de_la_Semana*horas del dia**********************************************
     tiempo_establ_por_IEEE_mantenimiento_1U_12 =2
@@ -746,39 +742,73 @@ def Simulacion(pico_horario):
     tiempo_establ_por_IEEE_mantenimiento_1U_350=5
     tiempo_establ_por_IEEE_mantenimiento_1U_400=6
     tiempo_establ_por_IEEE_mantenimiento_2U_400=6
-#***********************************VARIABLES DE MANTENIMIENTO********************************
-    MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,4434)
-    MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,2015)
-    MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,5512)
-    MANT_U12_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,970)
-    MANT_U12_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5959)
-    MANT_U20_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3006)
-    MANT_U20_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,7)
-    MANT_U20_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,5002)
-    MANT_U20_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,1872)
-    MANT_U50_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,7248)
-    MANT_U50_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,5540)
-    MANT_U50_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5043)
-    MANT_U50_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,4331)
-    MANT_U50_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,1809)
-    MANT_U50_6=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,6514)
-    MANT_U76_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,1305)
-    MANT_U76_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1828)
-    MANT_U76_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5041)
-    MANT_U76_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,5523)
-    MANT_U100_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,6719)
-    MANT_U100_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,6376)
-    MANT_U100_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,327)
-    MANT_U155_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,3317)
-    MANT_U155_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,7885)
-    MANT_U155_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,7257)
-    MANT_U155_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,2527)
-    MANT_U197_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,1849)
-    MANT_U197_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,4222)
-    MANT_U197_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,4318)
-    MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,5072)
-    MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,405)
-    MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,4190)
+
+#***********************************VARIABLES DE MANTENIMIENTO prueba sin mantenimiento********************************
+    # MANT_U12_1=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
+    # MANT_U12_2=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
+    # MANT_U12_3=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
+    # MANT_U12_4=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,7224)
+    # MANT_U12_5=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5208)
+    # MANT_U20_1=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3528)
+    # MANT_U20_2=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,2856)
+    # MANT_U20_3=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,7224)
+    # MANT_U20_4=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,7224)
+    # MANT_U50_1=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,5040)
+    # MANT_U50_2=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,3192)
+    # MANT_U50_3=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5208)
+    # MANT_U50_4=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,3528)
+    # MANT_U50_5=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,5880)
+    # MANT_U50_6=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,3528)
+    # MANT_U76_1=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,504)
+    # MANT_U76_2=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1176)
+    # MANT_U76_3=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5712)
+    # MANT_U76_4=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,1848)
+    # MANT_U100_1=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,4536)
+    # MANT_U100_2=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,5880)
+    # MANT_U100_3=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,5208)
+    # MANT_U155_1=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,2520)
+    # MANT_U155_2=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,4368)
+    # MANT_U155_3=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,1008)
+    # MANT_U155_4=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,6720)
+    # MANT_U197_1=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,2352)
+    # MANT_U197_2=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,1680)
+    # MANT_U197_3=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,5208)
+    # MANT_U350_1=[350]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,6384)
+    # MANT_U400_1=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,5712)
+    # MANT_U400_2=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,1512)
+#***********************************VARIABLES DE MANTENIMIENTO prueba con mantenimiento********************************
+    MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
+    MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
+    MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
+    MANT_U12_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,7224)
+    MANT_U12_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5208)
+    MANT_U20_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3528)
+    MANT_U20_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,2856)
+    MANT_U20_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,7224)
+    MANT_U20_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,7224)
+    MANT_U50_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,5040)
+    MANT_U50_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,3192)
+    MANT_U50_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5208)
+    MANT_U50_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,3528)
+    MANT_U50_5=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,5880)
+    MANT_U50_6=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,3528)
+    MANT_U76_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,504)
+    MANT_U76_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1176)
+    MANT_U76_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5712)
+    MANT_U76_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,1848)
+    MANT_U100_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,4536)
+    MANT_U100_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,5880)
+    MANT_U100_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,5208)
+    MANT_U155_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,2520)
+    MANT_U155_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,4368)
+    MANT_U155_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,1008)
+    MANT_U155_4=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,6720)
+    MANT_U197_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,2352)
+    MANT_U197_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,1680)
+    MANT_U197_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,5208)
+    MANT_U350_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,6384)
+    MANT_U400_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,5712)
+    MANT_U400_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,1512)
 #*Desarrollo de un AND para la union de los mantenimientos y los estados de degradaion
  #**********************************UNIDAD 12 *************************
     AND_U12_1=AND_entre_valores(C_DEG_U12_1,MANT_U12_1,12)
@@ -831,7 +861,7 @@ def Simulacion(pico_horario):
                                                                                                                                                                             AND_U197_1,AND_U197_2,AND_U197_3,
                                                                                                                                                                             AND_U350_1,
                                                                                                                                                                             AND_U400_1,AND_U400_2)]
-    # print(resultado_suma)
+    # # print(resultado_suma)
     # # Crear un gráfico de línea
     # plt.plot(resultado_suma)
     # # Mostrar el gráfico
