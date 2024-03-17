@@ -661,7 +661,7 @@ def error(suma_de_riesgo:float,pico_):
                 print('error>',error)
                 break
             # print('error>',error)
-            print(f'el valor esperado es de {valor_esperado_riesgo} MW')
+            # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
             generacion=Simulacion(pico_horario=pico_)
             suma_de_riesgo=riesgo(pico_,generacion)
     return valor_esperado_riesgo,error
