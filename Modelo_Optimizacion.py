@@ -28,7 +28,6 @@ plt.show()
 
 # media_pico=np.mean(pico_horario)
 # print(f'media_pico es igual a ={media_pico}')
-
 #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
 MTTF='MTTF(horas)'
 MTTR='MTTR(horas)'
@@ -144,42 +143,42 @@ tiempo_establ_por_IEEE_mantenimiento_3U_197=4
 tiempo_establ_por_IEEE_mantenimiento_1U_350=5
 tiempo_establ_por_IEEE_mantenimiento_1U_400=6
 tiempo_establ_por_IEEE_mantenimiento_2U_400=6
+tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,5,6,6]
 #*Valores de mantenimiento discretizados**********************************
 plt.figure(figsize=(15, 15))
 #***********************************VARIABLES DE MANTENIMIENTO prueba sin mantenimiento********************************
-# MANT_U12_1=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
-# MANT_U12_2=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
-# MANT_U12_3=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
-# MANT_U12_4=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,7224)
-# MANT_U12_5=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5208)
-# MANT_U20_1=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3528)
-# MANT_U20_2=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,2856)
-# MANT_U20_3=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,7224)
-# MANT_U20_4=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,7224)
-# MANT_U50_1=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,5040)
-# MANT_U50_2=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,3192)
-# MANT_U50_3=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5208)
-# MANT_U50_4=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,3528)
-# MANT_U50_5=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,5880)
-# MANT_U50_6=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,3528)
-# MANT_U76_1=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,504)
-# MANT_U76_2=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1176)
-# MANT_U76_3=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5712)
-# MANT_U76_4=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,1848)
-# MANT_U100_1=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,4536)
-# MANT_U100_2=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,5880)
-# MANT_U100_3=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,5208)
-# MANT_U155_1=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,2520)
-# MANT_U155_2=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,4368)
-# MANT_U155_3=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,1008)
-# MANT_U155_4=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,6720)
-# MANT_U197_1=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,2352)
-# MANT_U197_2=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,1680)
-# MANT_U197_3=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,5208)
-# MANT_U350_1=[350]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,6384)
-# MANT_U400_1=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,5712)
-# MANT_U400_2=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,1512)
-#***********************************VARIABLES DE MANTENIMIENTO prueba con mantenimiento********************************
+# MANT_U12_1=[12]*873# MANT_U12_2=[12]*8736
+# MANT_U12_3=[12]*8736
+# MANT_U12_4=[12]*8736
+# MANT_U12_5=[12]*8736
+# MANT_U20_1=[20]*8736
+# MANT_U20_2=[20]*8736
+# MANT_U20_3=[20]*8736
+# MANT_U20_4=[20]*8736
+# MANT_U50_1=[50]*8736
+# MANT_U50_2=[50]*8736
+# MANT_U50_3=[50]*8736
+# MANT_U50_4=[50]*8736
+# MANT_U50_5=[50]*8736
+# MANT_U50_6=[50]*8736
+# MANT_U76_1=[76]*873
+# MANT_U76_2=[76]*8736
+# MANT_U76_3=[76]*8736
+# MANT_U76_4=[76]*8736
+# MANT_U100_1=[100]*8736
+# MANT_U100_2=[100]*8736
+# MANT_U100_3=[100]*8736
+# MANT_U155_1=[155]*8736
+# MANT_U155_2=[155]*8736
+# MANT_U155_3=[155]*8736
+# MANT_U155_4=[155]*8736
+# MANT_U197_1=[197]*8736
+# MANT_U197_2=[197]*8736
+# MANT_U197_3=[197]*8736
+# MANT_U350_1=[350]*8736
+# MANT_U400_1=[400]*8736
+# MANT_U400_2=[400]*8736
+#***********************************VARIABLES DE MANTENIMIENTO prueba con mantenimiento datos Turco ********************************
 MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
 MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
 MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
@@ -338,7 +337,7 @@ resultado_suma = [a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+x+y+z+ab+cd+ef+g
                                                                                                                                                                         AND_U197_1,AND_U197_2,AND_U197_3,
                                                                                                                                                                         AND_U350_1,
                                                                                                                                                                         AND_U400_1,AND_U400_2)]
-print(resultado_suma)
+# print(resultado_suma)
 # Crear un gráfico de línea
 plt.plot(resultado_suma)
 # Mostrar el gráfico

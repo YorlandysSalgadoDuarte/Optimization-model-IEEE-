@@ -9,6 +9,7 @@ import random
 import matplotlib.pyplot as plt
 from random import Random
 import math
+from mealpy import FloatVar, PSO,GA,MA,SHADE,PSS,RUN,SCA,SHIO,AOA,CEM,ASO
 #***********************************************************Calculo_de_la_demanda******************************************************************
 def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,
                     pico_maximo_por_dias_en_porciento:int,pico__por_horas_en_porciento_semana_1_8_y_44_52:list,
@@ -485,7 +486,6 @@ def Parametros_para_MTTF_MTTR(Nombre_excel:str,MTTF:str, MTTR:str):
     # print('lista_paramet_dis_exp_de_MTTF',lista_paramet_dis_exp_de_MTTF)
     return lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR
 #******************************************************Funcion_escalon_para_encontrar_ttr_ttf******************************************************
-
 def calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR, n, valores_randon,valor_max_MW: int):
     tiempo_total = 8736
     resultado=[]
@@ -506,23 +506,6 @@ def calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR, 
             return resultado
         elif sum(tiempos_de_falla_o_repracion)<= tiempo_total:
             continue
-#***************************************************Funcion_Escalon*******************************************************************************
-# def funcion_escalon(ttf, ttr, valor_max_MW: int):
-#     tiempo_total = 8736
-#     resultado = []
-#     acumulado = 0
-#     escalon_actual = valor_max_MW
-#     for i, j in zip(sorted(ttf), sorted(ttr)):
-# # Mantener el escalón en valor_max_MW hasta el primer valor de ttf
-#         resultado.extend([escalon_actual] * int(i))
-#         acumulado += i
-# # Caer a cero durante el tiempo de ttr
-#         resultado.extend([0] * int(j))
-#         acumulado += j
-#   # Volver a subir a valor_max_MW al llegar al último valor de ttr
-#         if acumulado >= tiempo_total:
-#             break
-#     return resultado
 #*******************************************Funcion_de_subplot************************************************************************************
 def crear_subplot(indice, datos, etiqueta):
     plt.subplot(6,6 , indice)
@@ -550,6 +533,7 @@ def funcion_de_mantenimiento(semanas_de_mant_por_dato: int, semanas_entre_manten
             lista[0:horas_de_mant_por_datos]=[0]*horas_de_mant_por_datos
             return lista
         elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento==0:
+            inicio_mantenimiento_hora_year=round(inicio_mantenimiento_hora_year)
             lista[inicio_mantenimiento_hora_year:horas_de_mant_por_datos+inicio_mantenimiento_hora_year]=[0]*horas_de_mant_por_datos
             return lista
         elif horas_entre_mantenimiento < 8736 and inicio_mantenimiento_hora_year!=0 and semanas_entre_mantenimiento!=0:
@@ -575,53 +559,6 @@ def AND_entre_valores(valores1, valores2, unidad_en_MW):
             vector_resultante.append(0)
     # print("Resultado de la operación AND con valores específicos:", vector_resultante)
     return vector_resultante
-#******************************Algoritmo Genetico para minimizar la solucion del problema *******************************************************
-# def main(problema, prng=None, display=False):    
-#     if prng is None:
-#         prng = Random()
-#         prng.seed(time())
-        
-#     points = [(110.0, 225.0), (161.0, 280.0), (325.0, 554.0), (490.0, 285.0),
-#               (157.0, 443.0), (283.0, 379.0), (397.0, 566.0), (306.0, 360.0),
-#               (343.0, 110.0), (552.0, 199.0)]
-#     weights = [[0 for _ in range(len(points))] for _ in range(len(points))]
-#     for i, p in enumerate(points):
-#         for j, q in enumerate(points):
-#             weights[i][j] = math.sqrt((p[0] - q[0])**2 + (p[1] - q[1])**2)
-              
-#     problem = inspyred.benchmarks.TSP(weights)
-#     ea = inspyred.ec.EvolutionaryComputation(prng)
-#     ea.selector = inspyred.ec.selectors.tournament_selection
-#     ea.variator = [inspyred.ec.variators.partially_matched_crossover, 
-#                    inspyred.ec.variators.inversion_mutation]
-#     ea.replacer = inspyred.ec.replacers.generational_replacement
-#     ea.terminator = inspyred.ec.terminators.generation_termination
-#     final_pop = ea.evolve(generator=problem.generator, 
-#                           evaluator=evaluador, 
-#                           bounder=problem.bounder,
-#                           maximize=False, 
-#                           pop_size=100, 
-#                           max_generations=50,
-#                           tournament_size=5,
-#                           num_selected=100,
-#                           num_elites=1)
-    
-#     if display:
-#         best = min(ea.population)
-#         return best.candidate
-            
-# def evaluador(candidato):
-#     return problema(candidato),
-
-# if __name__ == '__main__':
-#     def problema(x):
-#         # Definir tu problema de minimización aquí
-#         # La función debe devolver el valor de la función objetivo a minimizar
-#         # basado en los valores de las variables de decisión en la lista `x`
-#         pass
-    
-#     resultado = main(problema, display=True)
-#     print('Mejor Solución:', resultado)
 #**********************************FUNCION DE Riesgo Utilizando montecarlos***********************************************************************
 def riesgo(demanda:list,generacion:list):
     #print(len(demanda),len(generacion))
@@ -632,7 +569,6 @@ def riesgo(demanda:list,generacion:list):
             riesgo.append(solv)
         if i>j:
             solv=i-j
-            
             riesgo.append(solv)
     suma_de_riesgo=sum(riesgo)
     # print('suma_de_riesgo=',suma_de_riesgo)
@@ -647,7 +583,7 @@ def error(suma_de_riesgo:float,pico_):
             vector_riesgo.append(0)
             valor_esperado_riesgo = np.mean(vector_riesgo)
             error=None
-            generacion=Simulacion(pico_horario=pico_)
+            generacion=Simulacion(pico_horario=pico_,)
             suma_de_riesgo=riesgo(pico_,generacion)
             continue
         elif suma_de_riesgo!=0:
@@ -675,7 +611,7 @@ def Simulacion(pico_horario):
     Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 #TODO degradation_de las Unidades_sin_mantenimiento
     lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
-#***************************Valores Degradacion calculados **************************\n')
+#***************************Valores Degradacion calculados Turco**************************\n')
     C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
     C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
     C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
@@ -744,39 +680,39 @@ def Simulacion(pico_horario):
     tiempo_establ_por_IEEE_mantenimiento_2U_400=6
 
 #***********************************VARIABLES DE MANTENIMIENTO prueba sin mantenimiento********************************
-    # MANT_U12_1=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
-    # MANT_U12_2=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
-    # MANT_U12_3=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
-    # MANT_U12_4=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_12,0,12,7224)
-    # MANT_U12_5=[12]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_12,0,12,5208)
-    # MANT_U20_1=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_20,0,20,3528)
-    # MANT_U20_2=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_20,0,20,2856)
-    # MANT_U20_3=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_20,0,20,7224)
-    # MANT_U20_4=[20]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_20,0,20,7224)
-    # MANT_U50_1=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_50,0,50,5040)
-    # MANT_U50_2=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_50,0,50,3192)
-    # MANT_U50_3=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_50,0,50,5208)
-    # MANT_U50_4=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_50,0,50,3528)
-    # MANT_U50_5=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_5U_50,0,50,5880)
-    # MANT_U50_6=[50]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_6U_50,0,50,3528)
-    # MANT_U76_1=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_76,0,76,504)
-    # MANT_U76_2=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_76,0,76,1176)
-    # MANT_U76_3=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_76,0,76,5712)
-    # MANT_U76_4=[76]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_76,0,76,1848)
-    # MANT_U100_1=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_100,0,100,4536)
-    # MANT_U100_2=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_100,0,100,5880)
-    # MANT_U100_3=[100]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_100,0,100,5208)
-    # MANT_U155_1=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_155,0,155,2520)
-    # MANT_U155_2=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_155,0,155,4368)
-    # MANT_U155_3=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_155,0,155,1008)
-    # MANT_U155_4=[155]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_4U_155,0,155,6720)
-    # MANT_U197_1=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_197,0,197,2352)
-    # MANT_U197_2=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_197,0,197,1680)
-    # MANT_U197_3=[197]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_197,0,197,5208)
-    # MANT_U350_1=[350]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_350,0,350,6384)
-    # MANT_U400_1=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_400,0,400,5712)
-    # MANT_U400_2=[400]*8736#funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_400,0,400,1512)
-#***********************************VARIABLES DE MANTENIMIENTO prueba con mantenimiento********************************
+    # MANT_U12_1=[12]
+    # MANT_U12_2=[12]
+    # MANT_U12_3=[12]
+    # MANT_U12_4=[12]
+    # MANT_U12_5=[12]
+    # MANT_U20_1=[20]
+    # MANT_U20_2=[20]
+    # MANT_U20_3=[20]
+    # MANT_U20_4=[20]
+    # MANT_U50_1=[50]
+    # MANT_U50_2=[50]
+    # MANT_U50_3=[50]
+    # MANT_U50_4=[50]
+    # MANT_U50_5=[50]
+    # MANT_U50_6=[50]
+    # MANT_U76_1=[76]
+    # MANT_U76_2=[76]
+    # MANT_U76_3=[76]
+    # MANT_U76_4=[76]
+    # MANT_U100_1=[100]
+    # MANT_U100_2=[100]
+    # MANT_U100_3=[100]
+    # MANT_U155_1=[155]
+    # MANT_U155_2=[155]
+    # MANT_U155_3=[155]
+    # MANT_U155_4=[155]
+    # MANT_U197_1=[197]
+    # MANT_U197_2=[197]
+    # MANT_U197_3=[197]
+    # MANT_U350_1=[350]
+    # MANT_U400_1=[400]
+    # MANT_U400_2=[400]
+#***********************************VARIABLES DE MANTENIMIENTO prueba con mantenimiento datos Turco********************************
     MANT_U12_1=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_1U_12,0,12,5880)
     MANT_U12_2=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_2U_12,0,12,4032)
     MANT_U12_3=funcion_de_mantenimiento(tiempo_establ_por_IEEE_mantenimiento_3U_12,0,12,3528)
@@ -885,3 +821,5 @@ def Simulacion(pico_horario):
     # # Mostrar el gráfico
     # plt.show()
     return resultado_suma
+#******************************Optimization solver*******************************************************
+#Rosenbrock function PSO

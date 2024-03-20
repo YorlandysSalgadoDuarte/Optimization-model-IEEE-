@@ -21,7 +21,6 @@ problem_dict_Rosenbrock = {
     "obj_func": Rosenbrock,
     "minmax": "min",
 }
-
 #**************************Rosenbrock function PSO*************************************
 # model = PSO.OriginalPSO(epoch=1000, pop_size=50, c1=2.05, c2=2.5, w=0.4)
 #******************************-GEnetic Algorithm****************************************
