@@ -162,7 +162,7 @@ def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2
         # print('suma_de_riesgo=',suma_de_riesgo)
         return suma_de_riesgo
     def error_Maint(suma_de_riesgo:float,pico_):
-    #?calculo de varianza en este caso para establecer el patron de parada segun montecarlos 
+#     #?calculo de varianza en este caso para establecer el patron de parada segun montecarlos
         vector_riesgo=[]
         error_Maint=[]
         while  True:
@@ -187,9 +187,9 @@ def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2
                 # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
                 generacion=Simulacion_Maintenance(pico_horario,solution,tiempo_establ_por_IEEE_mantenimiento)
                 suma_de_riesgo=riesgo_Maint(pico_horario,generacion)
-        return valor_esperado_riesgo,error_Maint
+        return valor_esperado_riesgo#,error_Maint
 
-#**************************************************************************************************Funcion de Simulacion completada*********************************
+# #**************************************************************************************************Funcion de Simulacion completada*********************************
     def Simulacion_Maintenance(pico_horario,solution,tiempo_establ_por_IEEE_mantenimiento):
         #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
         MTTF='MTTF(horas)'
@@ -347,11 +347,11 @@ def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2
     print('valor_esperado_de_riesgo=',valor_esperado_de_riesgo)
     return valor_esperado_de_riesgo
 problem_dict = {
-"bounds": FloatVar( lb=[0] * 32, ub=[8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-5*24*7,8736-6*24*7,8736-6*24*7], name="delta"),
+"bounds": FloatVar( lb=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ub=[8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-5*24*7,8736-6*24*7,8736-6*24*7], name="delta"),
 "obj_func": Maintenance,
 "minmax": "min",
 }
-model = SHADE.L_SHADE(epoch=1000, pop_size=50, miu_f = 0.5, miu_cr = 0.5)
+model =PSO.OriginalPSO(epoch=1000, pop_size=50, c1=2.05, c2=2.5, w=0.4)
 g_best = model.solve(problem_dict)
 print(f"Solution: {g_best.solution}, Fitness: {g_best.target.fitness}")
 print(f"Solution: {model.g_best.solution}, Fitness: {model.g_best.target.fitness}")

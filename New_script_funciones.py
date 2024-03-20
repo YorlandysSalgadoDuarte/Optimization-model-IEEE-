@@ -449,7 +449,7 @@ def calculo_demanda(pico_maximo:int,pico_maximo_por_semana_en_porciento:list,
         for j in pico__por_horas_en_porciento_semana_1_8_y_44_52[24:48]:
             solv1=i*(j/100)
             pico_.append(solv1)
-    print(pico_,len(pico_))
+    # print(pico_,len(pico_))
     return pico_
 #*********************************************************Calculo_de_los_valores_MTTR_MTTF_********************************************************
 #TODO_CALCULANDO PRIMERAMENTE LOS VALORES DE MTTF, la generacion de los datos tiene que ser menor que 8784
