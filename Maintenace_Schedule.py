@@ -5,33 +5,33 @@ import numpy as np
 from scipy.stats import expon
 import matplotlib.pyplot as plt
 import numpy as np
-from mealpy import FloatVar, PSO,GA,MA,SHADE,PSS,RUN,SCA,SHIO,AOA,CEM,ASO
+from mealpy import FloatVar, PSO, MA, SHADE, PSS, RUN, SCA, SHIO, AOA, CEM, ASO
 import time
 import math
 inicio=time.time()
 #**********************************************************************Datos de entrada de la demanda*********************************************************************
-pico_maximo=2850 # esta dado en MW
-pico_maximo_por_semana_en_porciento=[86.2,90.0,87.8,83.4,88,84.1,83.2,80.6,74,73.7,71.5,72.7,70.4,75,72.1,80,75.4,83.7,87,88,85.6,81.1,90,88.7,89.6,86.1, # de lunes a viernes
+pico_maximo = 2850 # esta dado en MW
+pico_maximo_por_semana_en_porciento = [86.2,90.0,87.8,83.4,88,84.1,83.2,80.6,74,73.7,71.5,72.7,70.4,75,72.1,80,75.4,83.7,87,88,85.6,81.1,90,88.7,89.6,86.1, # de lunes a viernes
         75.5,81.6,80.1,88.0,72.2,77.6,80.0,72.9,72.6,70.5,78.0,69.5,72.4,72.4,74.3,74.4,80.0,88.1,88.5,90.9,94.0,89.0,94.2,97.0,100,95.2] # dias de la semana
-pico_maximo_por_dias_en_porciento=[93,100,98,96,94,77,75]
+pico_maximo_por_dias_en_porciento = [93,100,98,96,94,77,75]
 #TODO los primeros 24 valores son para lod dias semanales y los siguientes para los fines de semana-----------------------------------------------
-pico_diario_por_horas_en_porciento_semana_1_8_y_44_52 =[67,63,60,59,59,60,74,86,95,96,96,95,95,95,93,94,99,100,100,96,91,83,73,63,
+pico_diario_por_horas_en_porciento_semana_1_8_y_44_52 = [67,63,60,59,59,60,74,86,95,96,96,95,95,95,93,94,99,100,100,96,91,83,73,63,
                                             78,72,68,66,64,65,66,70,80,88,90,91,90,88,87,87,91,100,99,97,94,92,87,81]
-pico_diario_por_horas_en_porciento_semana_18_30=       [64,60,58,56,56,58,64,76,87,95,99,100,99,100,100,97,96,96,93,92,92,93,87,72,
+pico_diario_por_horas_en_porciento_semana_18_30 = [64,60,58,56,56,58,64,76,87,95,99,100,99,100,100,97,96,96,93,92,92,93,87,72,
                                         74,70,66,65,64,62,62,66,81,86,91,93,93,92,91,91,92,94,95,95,100,93,88,80]
-pico_diario_por_horas_en_porciento_semana_9_17_y_31_43=[63,62,60,58,59,65,72,85,95,99,100,99,93,92,90,88,90,92,96,98,96,90,80,70,
+pico_diario_por_horas_en_porciento_semana_9_17_y_31_43 = [63,62,60,58,59,65,72,85,95,99,100,99,93,92,90,88,90,92,96,98,96,90,80,70,
                                         75,73,69,66,65,65,68,74,83,89,92,94,91,90,90,86,85,88,92,100,97,95,90,85]
 #******************************************************************Calculate to Demand **************************************************************************************
-pico_horario=calculo_demanda(pico_maximo,pico_maximo_por_semana_en_porciento,pico_maximo_por_dias_en_porciento,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52,pico_diario_por_horas_en_porciento_semana_18_30,pico_diario_por_horas_en_porciento_semana_9_17_y_31_43)
+pico_horario = calculo_demanda(pico_maximo,pico_maximo_por_semana_en_porciento,pico_maximo_por_dias_en_porciento,pico_diario_por_horas_en_porciento_semana_1_8_y_44_52,pico_diario_por_horas_en_porciento_semana_18_30,pico_diario_por_horas_en_porciento_semana_9_17_y_31_43)
 #***************************************************************Mintenance and Optimization **********************************************************************************************************************************************************
-def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,5,6,6]):
+def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,5,6,6]):
 #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
     MTTF='MTTF(horas)'
     MTTR='MTTR(horas)'
-    Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
+    Nombre_excel='Table_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
     Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 #TODO degradation_de las Unidades_sin_mantenimiento
-    lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
+    lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR, = Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
     C_DEG_U12_1=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
     C_DEG_U12_2=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
     C_DEG_U12_3=calulo_ttf_ttr(lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,0,50,12)[:8736]
@@ -150,51 +150,51 @@ def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2
                                                                                                                                                                             AND_U400_1,AND_U400_2)]
     def riesgo_Maint(demanda:list,generacion:list):
             #print(len(demanda),len(generacion))
-        riesgo=[]
-        for i,j in zip(demanda,generacion):
-            if j>=i:
-                solv=0
+        riesgo = []
+        for i, j in zip(demanda, generacion):
+            if j >= i:
+                solv = 0
                 riesgo.append(solv)
-            if i>j:
-                solv=i-j
+            if i > j:
+                solv = i-j
                 riesgo.append(solv)
-        suma_de_riesgo=sum(riesgo)
+        suma_de_riesgo = sum(riesgo)
         # print('suma_de_riesgo=',suma_de_riesgo)
         return suma_de_riesgo
     def error_Maint(suma_de_riesgo:float,pico_):
 #     #?calculo de varianza en este caso para establecer el patron de parada segun montecarlos
-        vector_riesgo=[]
-        error_Maint=[]
+        vector_riesgo = []
+        error_Maint = []
         while  True:
-            if suma_de_riesgo==0:
+            if suma_de_riesgo == 0:
                 vector_riesgo.append(0)
                 valor_esperado_riesgo = np.mean(vector_riesgo)
-                error_Maint=None
-                generacion=Simulacion_Maintenance(pico_horario,solution,tiempo_establ_por_IEEE_mantenimiento)
-                suma_de_riesgo=riesgo_Maint(pico_horario,generacion)
+                error_Maint = None
+                generacion = Simulacion_Maintenance(pico_horario, solution, tiempo_establ_por_IEEE_mantenimiento)
+                suma_de_riesgo = riesgo_Maint(pico_horario,generacion)
                 continue
-            elif suma_de_riesgo!=0:
+            elif suma_de_riesgo != 0:
                 vector_riesgo.append(suma_de_riesgo)
                 valor_esperado_riesgo = np.mean(vector_riesgo)
                 desviacion_estandar = np.std(vector_riesgo)
                 error_Maint=desviacion_estandar/(valor_esperado_riesgo*math.sqrt(len(vector_riesgo)))
     #?Valor del error_Maint para el criterio de parada
-                if error_Maint<=0.01 and desviacion_estandar>0:
-                    print("el valor_esperado_riesgo del valor de riesgo es:> ",valor_esperado_riesgo)
-                    print('error_Maint>',error_Maint)
+                if error_Maint <= 0.05 and desviacion_estandar > 0:
+                    print("el valor_esperado_riesgo del valor de riesgo es:> ", valor_esperado_riesgo)
+                    print('error_Maint>', error_Maint)
                     break
                 # print('error_Maint>',error_Maint)
                 # print(f'el valor esperado es de {valor_esperado_riesgo} MW')
-                generacion=Simulacion_Maintenance(pico_horario,solution,tiempo_establ_por_IEEE_mantenimiento)
-                suma_de_riesgo=riesgo_Maint(pico_horario,generacion)
+                generacion = Simulacion_Maintenance(pico_horario, solution, tiempo_establ_por_IEEE_mantenimiento)
+                suma_de_riesgo = riesgo_Maint(pico_horario,generacion)
         return valor_esperado_riesgo#,error_Maint
 
 # #**************************************************************************************************Funcion de Simulacion completada*********************************
-    def Simulacion_Maintenance(pico_horario,solution,tiempo_establ_por_IEEE_mantenimiento):
+    def Simulacion_Maintenance(pico_horario, solution, tiempo_establ_por_IEEE_mantenimiento):
         #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
         MTTF='MTTF(horas)'
         MTTR='MTTR(horas)'
-        Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
+        Nombre_excel='Table_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
         Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
     #TODO degradation_de las Unidades_sin_mantenimiento
         lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
@@ -343,18 +343,35 @@ def Maintenance(solution,tiempo_establ_por_IEEE_mantenimiento=[2,2,2,2,2,2,2,2,2
         return resultado_suma
 
     suma_de_riesgo = riesgo_Maint(pico_horario,resultado_suma)
-    valor_esperado_de_riesgo=error_Maint(suma_de_riesgo,pico_horario)
+    valor_esperado_de_riesgo = error_Maint(suma_de_riesgo,pico_horario)
     print('valor_esperado_de_riesgo=',valor_esperado_de_riesgo)
     return valor_esperado_de_riesgo
+# constraints
 problem_dict = {
-"bounds": FloatVar( lb=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], ub=[8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-5*24*7,8736-6*24*7,8736-6*24*7], name="delta"),
+"bounds": FloatVar( lb = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    ub = [8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-2*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-3*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-4*24*7,8736-5*24*7,8736-6*24*7,8736-6*24*7],
+                    name = "delta"),
 "obj_func": Maintenance,
 "minmax": "min",
 }
-model =PSO.OriginalPSO(epoch=1000, pop_size=50, c1=2.05, c2=2.5, w=0.4)
+# algorithms
+# PSO
+# model = PSO.OriginalPSO(epoch = 500, pop_size = 50)
+# SHADE
+# model = SHADE.OriginalSHADE(epoch = 500, pop_size = 50)
+# model = SHADE.L_SHADE(epoch = 500, pop_size = 50)
+# RUN
+# model = RUN.OriginalRUN(epoch = 500, pop_size = 50)
+# SCA
+# model = SCA.DevSCA(epoch = 500, pop_size = 50)
+# SHIO
+model = SHIO.OriginalSHIO(epoch = 500, pop_size = 50)
+# ASO
+# model = ASO.OriginalASO(epoch = 500, pop_size = 50)
+# solving the optimization
 g_best = model.solve(problem_dict)
 print(f"Solution: {g_best.solution}, Fitness: {g_best.target.fitness}")
 print(f"Solution: {model.g_best.solution}, Fitness: {model.g_best.target.fitness}")
 #TODO *********************CALCULO DEL TIEMPO DE CORRIDA**************************************
-final=time.time()
+final = time.time()
 print(f'tiempo de iteracion del modelo es {final - inicio}\n')

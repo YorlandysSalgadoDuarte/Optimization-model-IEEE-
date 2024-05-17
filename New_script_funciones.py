@@ -592,7 +592,7 @@ def error(suma_de_riesgo:float,pico_):
             desviacion_estandar = np.std(vector_riesgo)
             error=desviacion_estandar/(valor_esperado_riesgo*math.sqrt(len(vector_riesgo)))
 #?Valor del error para el criterio de parada
-            if error<=0.01 and desviacion_estandar>0:
+            if error <= 0.05 and desviacion_estandar > 0:
                 print("el valor_esperado_riesgo del valor de riesgo es:> ",valor_esperado_riesgo)
                 print('error>',error)
                 break
@@ -607,7 +607,7 @@ def Simulacion(pico_horario):
     #! Calculo de los valores TTR y TTF de las variables aleatorias en cada caso =================================================================================
     MTTF='MTTF(horas)'
     MTTR='MTTR(horas)'
-    Nombre_excel='Tabla4_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
+    Nombre_excel='Table_IEEE.xlsx' # el excel debe estar dentro de la misma carpeta
     Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
 #TODO degradation_de las Unidades_sin_mantenimiento
     lista_paramet_dis_exp_de_MTTF,lista_paramet_dis_exp_de_MTTR,=Parametros_para_MTTF_MTTR(Nombre_excel,MTTF,MTTR)
